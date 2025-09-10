@@ -1,5 +1,5 @@
-Gen AI Learning Roadmap
-1. Building Basic LLM Apps
+# Gen AI Learning Roadmap
+# 1. Building Basic LLM Apps
 
 Open Source & Closed LLMs
 
