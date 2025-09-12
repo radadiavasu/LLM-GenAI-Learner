@@ -104,3 +104,81 @@ Components needed:
 ## 🔄 Alternatives to LangChain  
 - **LlamaIndex**  
 - **Haystack**  
+
+---
+# Components
+
+## 1. Models  
+
+### 1.1 Language Models  
+Language Models (LLMs) are used for generating and understanding text. With them, we can build chatbots, AI assistants, and other NLP-powered applications.  
+
+#### Types of Language Models  
+
+1. **LLMs (Base Models)**  
+   - Used for general-purpose tasks like text generation, summarization, Q&A, and code completion.  
+   - Do not have built-in memory.  
+   - No real understanding of users — every request is treated independently.  
+
+2. **Chat Models**  
+   - Designed for conversational tasks.  
+   - Take a sequence of messages as input and return chat-like responses.  
+   - Support conversational memory (e.g., remembering context within a session).  
+
+---
+
+#### Important Parameters  
+
+- **Temperature**: Controls randomness in model outputs.  
+  - Lower values (`0.0 – 0.3`) → more deterministic and predictable (factual answers).  
+  - Mid values (`0.5 – 0.7`) → balanced, natural responses (general Q&A, explanations).  
+  - Higher values (`0.9 – 1.2`) → more creative and diverse (stories, jokes, brainstorming).  
+  - Very high (`1.2+`) → wild randomness, often incoherent.  
+
+- **max_completion_tokens**: Defines the maximum number of tokens (roughly words/pieces of words) the model can generate.  
+  - Useful for **cost control** since API usage is charged per token.  
+  - Setting tokens too high wastes quota quickly.  
+
+---
+
+#### Open vs Closed Source Models  
+
+- **Closed-source models (paid)**:  
+  Examples: OpenAI (GPT), Anthropic (Claude), Google (Gemini).  
+  - Access via paid APIs.  
+
+- **Open-source models (free/community-driven)**:  
+  Examples: Hugging Face models, Transformers, LLaMA, Mistral.  
+  - Can be used via hosted APIs (may have free limits, then paid).  
+  - Or downloaded and run locally (requires good hardware).  
+
+---
+
+### 1.2 Embedding Models  
+Embedding models convert text into **vectors (arrays of numbers)**.  
+These vectors capture semantic meaning and are mainly used for **semantic search and RAG (Retrieval-Augmented Generation)** applications.  
+
+#### Example:  
+Suppose you have documents about cricketers A, B, C, D, and E.  
+
+1. You load an embedding model and embed both documents and a user query (e.g., *“Who is A?”*).  
+2. The model outputs vectors (high-dimensional numbers).  
+3. Semantic search compares the query vector with document vectors.  
+4. The closest match (highest similarity score) is retrieved.  
+5. The LLM then uses this retrieved context to generate an accurate answer.  
+
+---
+
+#### Embedding Parameters  
+
+- **Dimensions**: The size of the vector (e.g., 384, 768, 1536).  
+  - Fewer dimensions = cheaper & faster, but capture less context.  
+  - More dimensions = richer context, but higher cost and memory usage.  
+
+---
+
+#### Summary  
+
+- **Language Models** return **text outputs** from text inputs.  
+- **Embedding Models** return **vectors (numbers)** from text inputs.  
+- Embeddings are crucial for improving **semantic search**, **RAG**, and building context-aware applications.  
