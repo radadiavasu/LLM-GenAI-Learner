@@ -72,7 +72,7 @@ Indexes connect external information to the LLM. They include:
 - Retrievers  
 
 **Use Case Example:**  
-Attach a code file → LangChain indexes it → AI suggests improvements or fixes bugs.  
+Attach a code file → LangChain indexes it → AI suggests improvements or fixes bugs. (Just like we do regularly with chatgpt.)
 
 ### 6. Agents  
 Agents are advanced AI assistants built on LLMs.  
