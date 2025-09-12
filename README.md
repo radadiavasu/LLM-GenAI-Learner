@@ -1,127 +1,106 @@
-# Gen AI Learning Roadmap
-## 1. Building Basic LLM Apps
+# Gen AI Learning Roadmap  
 
-Open Source & Closed LLMs
+## 1. Building Basic LLM Apps  
+- Open Source & Closed LLMs  
+- Using LLM APIs  
+- LangChain  
+- HuggingFace  
+- Ollama  
 
-Using LLM APIs
+## 2. Prompt Engineering  
 
-LangChain
+## 3. Retrieval-Augmented Generation (RAG)  
 
-HuggingFace
+## 4. Fine-Tuning  
 
-Ollama
+## 5. Agentic AI  
 
-2. Prompt Engineering
-3. Retrieval-Augmented Generation (RAG)
-4. Fine-Tuning
-5. Agentic AI
-6. LLMOps
-7. Miscellaneous
-LangChain Overview
+## 6. LLMOps  
 
-LangChain is an open-source framework for developing applications powered by Large Language Models (LLMs). It provides tools to build scalable, production-ready AI systems.
+## 7. Miscellaneous  
 
-Core Areas
+---
 
-Fundamentals
+# LangChain Overview  
 
-RAG (Retrieval-Augmented Generation)
+LangChain is an **open-source framework** for developing applications powered by Large Language Models (LLMs).  
+It provides tools to build scalable, production-ready AI systems.  
 
-Agents
+### Core Areas  
+1. Fundamentals  
+2. RAG (Retrieval-Augmented Generation)  
+3. Agents  
 
-🔎 Semantic Search
+---
 
-Semantic search enhances context-aware text generation using embeddings (vector representations).
+## 🔎 Semantic Search  
+Semantic search enhances context-aware text generation using **embeddings (vector representations)**.  
 
-Example: A PDF contains info about topics A, B, and C. If a user asks about A, semantic search finds similarities with the embeddings and retrieves the most relevant details.
+**Example:**  
+A PDF contains information about topics A, B, and C. If a user asks about A, semantic search finds similarities with the embeddings and retrieves the most relevant details.  
 
-🧩 Components of LangChain
-1. Models
+---
 
-Language Models: Standard LLMs used for chatbots and AI agents.
+## 🧩 Components of LangChain  
 
-Embedding Models: Convert text into vectors for semantic search and retrieval.
+### 1. Models  
+- **Language Models** → Standard LLMs used for chatbots and AI agents.  
+- **Embedding Models** → Convert text into vectors for semantic search and retrieval.  
 
-2. Prompts
+### 2. Prompts  
+Instructions or inputs you provide to LLMs to guide their responses.  
 
-Instructions or inputs you provide to LLMs to guide their responses.
+### 3. Chains  
+Chains are pipelines that connect multiple components together to perform tasks.  
 
-3. Chains
+- **Parallel Chains** → Generate detailed, report-style answers using multiple LLMs.  
+- **Conditional Chains** → Perform different actions based on conditions (e.g., positive/negative feedback workflows).  
 
-Chains are pipelines that connect multiple components together to perform tasks.
+### 4. Memory  
+LLM APIs are **stateless** (they don’t remember past queries). Memory helps overcome this limitation.  
 
-Parallel Chains: Generate detailed, report-style answers using multiple LLMs.
+- **Conversation Buffer Memory** → Stores complete conversation history (expensive for large data).  
+- **Conversation Window Memory** → Keeps only the last N interactions.  
+- **Summary-Based Memory** → Summarizes history, saving cost and space.  
+- **Custom Memory** → Stores personalized or private key facts (e.g., user preferences).  
 
-Conditional Chains: Perform different actions based on conditions (e.g., positive/negative feedback workflows).
+### 5. Indexes  
+Indexes connect external information to the LLM. They include:  
+- Document Loader  
+- Text Splitter  
+- Vector Store  
+- Retrievers  
 
-4. Memory
+**Use Case Example:**  
+Attach a code file → LangChain indexes it → AI suggests improvements or fixes bugs.  
 
-LLM APIs are stateless (they don’t remember past queries). Memory helps overcome this limitation.
+### 6. Agents  
+Agents are advanced AI assistants built on LLMs.  
+- Unlike simple chatbots, agents combine **semantic search + embeddings + NLU** to handle complex, non-linear queries.  
+- They can not only answer but also **act** (e.g., book tickets, send emails).  
 
-Conversation Buffer Memory: Stores complete conversation history (expensive for large data).
+---
 
-Conversation Window Memory: Keeps only the last N interactions.
+## ⚙️ Example: PDF-based Q&A Chatbot  
+Components needed:  
+1. Data Loader  
+2. Text Splitter  
+3. Embeddings (Vectors)  
+4. Database (MLOps)  
+5. Retrieval  
+6. LLM  
 
-Summary-Based Memory: Summarizes history, saving cost and space.
+---
 
-Custom Memory: Stores personalized or private key facts (e.g., user preferences).
+## 🚀 Applications with LangChain  
+- Conversational Chatbots  
+- AI Knowledge Assistants (e.g., live class helper)  
+- AI Agents (performing real tasks like booking tickets, sending messages)  
+- Workflow Automation (productivity tools for companies, schools, or personal use)  
+- Summarization / Research Support  
 
-5. Indexes
+---
 
-Indexes connect external information to the LLM. They include:
-
-Document Loader
-
-Text Splitter
-
-Vector Store
-
-Retrievers
-
-Use Case Example: Attach a code file → LangChain indexes it → AI suggests improvements or fixes bugs.
-
-6. Agents
-
-Agents are advanced AI assistants built on LLMs.
-
-Unlike simple chatbots, agents combine semantic search + embeddings + NLU to handle complex, non-linear queries.
-
-They can not only answer but also act (e.g., book tickets, send emails).
-
-⚙️ Example: PDF-based Q&A Chatbot
-
-Components needed:
-
-Data Loader
-
-Text Splitter
-
-Embeddings (Vectors)
-
-Database (MLOps)
-
-Retrieval
-
-LLM
-
-🚀 Applications with LangChain
-
-Conversational Chatbots
-
-AI Knowledge Assistants (e.g., live class helper)
-
-AI Agents (performing real tasks like booking tickets, sending messages)
-
-Workflow Automation (productivity tools for companies, schools, or personal use)
-
-Summarization / Research Support
-
-🔄 Alternatives to LangChain
-
-LlamaIndex
-
-Haystack
-
-👉 This structure makes it clean, professional, and beginner-friendly while keeping your detailed notes intact.
-
-Do you also want me to add diagrams (like flowcharts for RAG or Agents) in Markdown style for better visualization in your README?
+## 🔄 Alternatives to LangChain  
+- **LlamaIndex**  
+- **Haystack**  
