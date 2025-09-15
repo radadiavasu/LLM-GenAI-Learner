@@ -249,7 +249,7 @@ LangChain also supports **multi-message conversations** with specialized classes
 - **User Message** → Input provided by the user.  
 - **AI Message** → The response returned by the AI.  
 
-*Example
+- Example:
 ```
     from langchain_core.prompts import ChatPromptTemplate, HumanMessage, SystemMessage
 
