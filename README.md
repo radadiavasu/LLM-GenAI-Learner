@@ -182,3 +182,48 @@ Suppose you have documents about cricketers A, B, C, D, and E.
 - **Language Models** return **text outputs** from text inputs.  
 - **Embedding Models** return **vectors (numbers)** from text inputs.  
 - Embeddings are crucial for improving **semantic search**, **RAG**, and building context-aware applications.  
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Prompts: Prompts are the input instruction or a query asked by user to the model to guide its output.
+
+Types of prompts:
+
+1. Text based prompts:
+
+To make prompt template use langchain's built-in PromptTemplate class and give your template.
+
+-> Single Message(single turn stand alone queries)
+
+* Static message: Those templates are heavily reliable & sensitive on LLM's, with some minor changes will make huge impact in overall response and not preferred, now why? For example you want to find something and just have the topic idea but not the related name like "I want to find this type of research but don't know the name" so at that time LLM gives you very wrong output which is not desirable.
+
+* Dynamic message: These prompts are widely accepts because they have the solid structure of prompts and we called it "prompt templates" now here we set template to take some additional inputs with same example you give some topic idea or summarize the topic then the style of the topic and the explanation style so now this makes the very unique thing with dynamic prompts so the real world example is, chatgpt at last it asks to modify or style or extend or make it simple etc... once you asks something to chatgpt so basically OpenAI set the dynamic templates and try to dig in that specific topic you've asked.
+
+Prompt Template: In langchain for create creative prompts dynamically by inserting variables into a predefined template. Instead of hardcoding template PromptTemplate allows us to define placeholders that can be use with different inputs. This makes easy to implement, reusable, flexible and easy to manage especially while working with the dynamic user inputs.
+
+Q Why should I need to make PromptTemplate for over "f" strings?
+Ans: There are three reasons,
+
+*. Default Validation: It provide validations which really help full to prevent any kind of errors while developing not on server. For example If you provide three variables in template but mention only two or entered wrong before invoke so it throws the error on developing side not on server side.
+
+*. Reusable: Eventually you can reuse template with some other types of tasks too. It saves lots of time.
+
+*. LangChain Ecosystem: Generally here you can make the json file and saves your each time template in professions way and that is ecosystem you make for any kind of tasks like Make a separate file which can generate your each type of prompts template in json format and make a file then use into your main file. So basically ecosystem provide robustness while dealing with heavy or complex tasks.
+
+-> List of Messages (Multi-turn conversation)
+
+(Classes for static messages in langchain)
+
+1. System Message: It is the asking when starting conversations like you're a very helpful, you're such a knowledgeable person, Hi, How are you etc.....
+
+2. User Message: It is basically we (humans) send input to the LLM.
+
+3. AI Message: It is the response (answer) messages we get from AI (LLM).
+
+(Classes for dynamic messages in langchain)
+
+* Chat Prompt Template: Almost same as "Prompt Template" just different is that you don't decide the specific type of message example for user message "You've good taste in {domain}, here domain is not static it could be any domain so it's dynamic same for human message "Give me the info about this {topic}, topic could be anything."
+
+* Message Placeholder: This is special placeholder use inside "chat prompt template" to dynamically insert chat history or a list of messages at runtime.
+
+2. Image / Sound / Video Prompts (Multi model prompts):
