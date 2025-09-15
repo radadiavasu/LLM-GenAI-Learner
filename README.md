@@ -184,46 +184,99 @@ Suppose you have documents about cricketers A, B, C, D, and E.
 - Embeddings are crucial for improving **semantic search**, **RAG**, and building context-aware applications.  
 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-Prompts: Prompts are the input instruction or a query asked by user to the model to guide its output.
+---
+# Prompts  
 
-Types of prompts:
+Prompts are the **instructions or queries** given by a user to an LLM in order to guide its output.  
+A well-designed prompt can dramatically improve the quality, accuracy, and relevance of the response.  
 
-1. Text based prompts:
+---
 
-To make prompt template use langchain's built-in PromptTemplate class and give your template.
+## Types of Prompts  
 
--> Single Message(single turn stand alone queries)
+### 1. Text-Based Prompts  
 
-* Static message: Those templates are heavily reliable & sensitive on LLM's, with some minor changes will make huge impact in overall response and not preferred, now why? For example you want to find something and just have the topic idea but not the related name like "I want to find this type of research but don't know the name" so at that time LLM gives you very wrong output which is not desirable.
+#### ➝ Single Message (Single-turn, stand-alone queries)  
 
-* Dynamic message: These prompts are widely accepts because they have the solid structure of prompts and we called it "prompt templates" now here we set template to take some additional inputs with same example you give some topic idea or summarize the topic then the style of the topic and the explanation style so now this makes the very unique thing with dynamic prompts so the real world example is, chatgpt at last it asks to modify or style or extend or make it simple etc... once you asks something to chatgpt so basically OpenAI set the dynamic templates and try to dig in that specific topic you've asked.
+- **Static Messages**  
+  - Rigid templates that are heavily dependent on exact wording.  
+  - Small changes in phrasing can drastically alter results.  
+  - **Not preferred** for exploratory or uncertain queries.  
+  - **Example**: Asking *“I want this type of research but don’t know its name”* → The model may hallucinate or give irrelevant answers.  
 
-Prompt Template: In langchain for create creative prompts dynamically by inserting variables into a predefined template. Instead of hardcoding template PromptTemplate allows us to define placeholders that can be use with different inputs. This makes easy to implement, reusable, flexible and easy to manage especially while working with the dynamic user inputs.
+- **Dynamic Messages**  
+  - More reliable and flexible.  
+  - Built with **Prompt Templates** that allow placeholders for variables.  
+  - Useful when users don’t know exact names but can provide partial info, context, or desired output style.  
+  - **Example**: Instead of hardcoding, you define a template:  
+    ```
+    Summarize the topic "{topic}" in the style of {style}.
+    ```  
+    If the user provides *topic = AI in Healthcare* and *style = simple*, the model generates a tailored response.  
 
-Q Why should I need to make PromptTemplate for over "f" strings?
-Ans: There are three reasons,
+---
 
-*. Default Validation: It provide validations which really help full to prevent any kind of errors while developing not on server. For example If you provide three variables in template but mention only two or entered wrong before invoke so it throws the error on developing side not on server side.
+#### PromptTemplate (LangChain)  
 
-*. Reusable: Eventually you can reuse template with some other types of tasks too. It saves lots of time.
+LangChain provides the `PromptTemplate` class to create structured, reusable, and validated prompts.  
+This is preferred over basic Python `f-strings`.  
 
-*. LangChain Ecosystem: Generally here you can make the json file and saves your each time template in professions way and that is ecosystem you make for any kind of tasks like Make a separate file which can generate your each type of prompts template in json format and make a file then use into your main file. So basically ecosystem provide robustness while dealing with heavy or complex tasks.
+**Why use PromptTemplate over f-strings?**  
 
--> List of Messages (Multi-turn conversation)
+1. **Validation**  
+   - Prevents runtime errors.  
+   - Example: If you define 3 variables but provide only 2, LangChain throws an error during development instead of failing silently at runtime.  
 
-(Classes for static messages in langchain)
+2. **Reusability**  
+   - Templates can be used across different tasks with minimal changes.  
+   - Saves time and avoids repetitive code.  
 
-1. System Message: It is the asking when starting conversations like you're a very helpful, you're such a knowledgeable person, Hi, How are you etc.....
+3. **Ecosystem Support**  
+   - Prompts can be stored in JSON or separate config files.  
+   - Encourages building a clean, maintainable **prompt ecosystem** for complex projects.  
 
-2. User Message: It is basically we (humans) send input to the LLM.
+---
 
-3. AI Message: It is the response (answer) messages we get from AI (LLM).
+### 2. List of Messages (Multi-turn Conversations)  
 
-(Classes for dynamic messages in langchain)
+LangChain also supports **multi-message conversations** with specialized classes.  
 
-* Chat Prompt Template: Almost same as "Prompt Template" just different is that you don't decide the specific type of message example for user message "You've good taste in {domain}, here domain is not static it could be any domain so it's dynamic same for human message "Give me the info about this {topic}, topic could be anything."
+#### Classes for Static Messages  
+- **System Message** → Defines behavior of the assistant.  
+  *Example: “You are a helpful and knowledgeable assistant.”*  
+- **User Message** → Input provided by the user.  
+- **AI Message** → The response returned by the AI.  
 
-* Message Placeholder: This is special placeholder use inside "chat prompt template" to dynamically insert chat history or a list of messages at runtime.
+#### Classes for Dynamic Messages  
+- **ChatPromptTemplate**  
+  - Similar to `PromptTemplate` but used for conversations.  
+  - Allows variables inside user or AI messages.  
+  - Example:  
+    ```
+    Human: "Give me information about {topic}"
+    AI: "Sure! Here's a summary of {topic}..."
+    ```  
 
-2. Image / Sound / Video Prompts (Multi model prompts):
+- **MessagePlaceholder**  
+  - Special placeholder used inside a `ChatPromptTemplate` to dynamically insert **chat history** or **lists of messages** at runtime.  
+  - Ensures the model has context across turns.  
+
+---
+
+### 3. Multi-Modal Prompts  
+Prompts are not limited to text. Modern LLMs can handle:  
+- **Image Prompts**  
+- **Audio Prompts**  
+- **Video Prompts**  
+
+These are essential in **multi-modal AI systems** (e.g., asking an AI to describe an image or generate a caption for a video).  
+
+---
+
+## Summary  
+
+- Prompts are **instructions to guide LLM output**.  
+- **Static prompts** are fragile → avoid for real-world apps.  
+- **Dynamic prompts with PromptTemplate** are powerful → reusable, validated, and ecosystem-friendly.  
+- **Multi-turn prompts** allow conversational context.  
+- **Multi-modal prompts** extend LLMs beyond text.  
