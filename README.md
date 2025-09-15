@@ -200,7 +200,7 @@ A well-designed prompt can dramatically improve the quality, accuracy, and relev
 
 - **Static Messages**  
   - Rigid templates that are heavily dependent on exact wording.  
-  - Small changes in phrasing can drastically alter results.  
+  - Small changes in phrasing = very different results means very sensitive and highly reliable on LLM.  
   - **Not preferred** for exploratory or uncertain queries.  
   - **Example**: Asking *“I want this type of research but don’t know its name”* → The model may hallucinate or give irrelevant answers.  
 
@@ -235,6 +235,8 @@ This is preferred over basic Python `f-strings`.
    - Prompts can be stored in JSON or separate config files.  
    - Encourages building a clean, maintainable **prompt ecosystem** for complex projects.  
 
+
+
 ---
 
 ### 2. List of Messages (Multi-turn Conversations)  
@@ -247,9 +249,24 @@ LangChain also supports **multi-message conversations** with specialized classes
 - **User Message** → Input provided by the user.  
 - **AI Message** → The response returned by the AI.  
 
+*Example
+```
+    from langchain_core.prompts import ChatPromptTemplate, HumanMessage, SystemMessage
+
+    chat_template = ChatPromptTemplate.from_messages(
+        [
+            SystemMessage(content="You are a helpful AI assistant."),
+            HumanMessage(content="What is the capital of {country}?"),
+        ]
+    )
+    formatted_prompt = chat_template.format_messages(country="France")
+    # formatted_prompt will be a list of message objects:
+    # [SystemMessage(content='You are a helpful AI assistant.'), HumanMessage(content='What is the capital of France?')]
+```
+
 #### Classes for Dynamic Messages  
 - **ChatPromptTemplate**  
-  - Similar to `PromptTemplate` but used for conversations.  
+  - Similar to `PromptTemplate` but used for conversations chat-style modern LLM's.
   - Allows variables inside user or AI messages.  
   - Example:  
     ```
