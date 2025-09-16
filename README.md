@@ -328,11 +328,11 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 ## 🔹Q. Now why would we need structured output?
 
-- Ans: Generally structured output will return well-defined data format (example: JSON) rather than free-form text. Now this makes really useful to work or integrate LLM's with other systems too.
+- Ans: Generally structured output will return well-defined data format (example: JSON) rather than free-form text. Now this makes really useful to work when integrate LLM's with other systems too.
 
-- **Data Extraction:** For storing a data into database from key data extraction from data then we make structured data like in JSON then store in DB.
+- **Data Extraction:** Store structured data (e.g., JSON) directly in databases.
 
-- **API Building:** For building API's from structured data soa anyone can use across the world.
+- **API Building:** For building API's from structured data so anyone can use across the world.
 
 - **Agents:** AI agents need structured data for accurate actions.
 
@@ -350,7 +350,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 ## 🔹 Data Formats for Structured Outputs
 
-## 1. TypedDict (Built-in): Define keys & values with type hints relevent for prevents runtime errors (helps developers know expected structure) but no strict validation (e.g., if you expect int but get str, it won’t complain)
+# 1. TypedDict (Built-in): Define keys & values with type hints relevent for prevents runtime errors (helps developers know expected structure) but no strict validation (e.g., if you expect int but get str, it won’t complain)
 
 - 🔹 **Example**
 
@@ -362,7 +362,7 @@ class TripPlan(TypedDict):
     activity: str
 ```
 
-## 2. Pydantic (Popular with FastAPI): Provide strong data validation & parsing and ensures the data you work with is correct, structured and safe-search.
+# 2. Pydantic (Popular with FastAPI): Provide strong data validation & parsing and ensures the data you work with is correct, structured and safe-search.
 
 - 🔹 **Example**
 
@@ -374,7 +374,7 @@ class TripPlan(BaseModel):
     activity: str
 ```
 
-## 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
+# 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
 
 - 🔹 **Example**
 
