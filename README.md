@@ -326,7 +326,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 ]
 ```
 
-##🔹Q. Now why would we need structured output?
+## 🔹Q. Now why would we need structured output?
 
 - Ans: Generally structured output will return well-defined data format (example: JSON) rather than free-form text. Now this makes really useful to work or integrate LLM's with other systems too.
 
@@ -336,7 +336,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 - **Agents:** AI agents need structured data for accurate actions.
 
-##🔹How many types of LLM's can generate structured output:
+## 🔹How many types of LLM's can generate structured output:
 
 - Some LLMs (e.g., OpenAI, Google, Anthropic) provide structured output options:
 
