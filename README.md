@@ -336,7 +336,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 - **Agents:** AI agents need structured data for accurate actions.
 
-## 🔹How many types of LLM's can generate structured output:
+## 🔹How many types of LLM's can generate structured output?
 
 - Some LLMs (e.g., OpenAI, Google, Anthropic) provide structured output options:
 
@@ -348,10 +348,30 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 -  1. 'JSON mode' (while working with claude or jemini because they only support json format)
    2. 'function calling' (while working with openai for calling function (agents)).
 
-- Data format before call structured output function we need format our data in three ways we can make,
+## 🔹 Data Formats for Structured Outputs
 
-## 1. TypedDict: Nothing but your data format would be in keys and values where we just need to specify what to put in keys and values. It helps where we define that what type of datatype needed with key int, str etc.. It prevents runtime error while new one programmer come and change the type but there is cons like it can't perform validation like suppose if you provide int and the value you provide value in int in str format it still gives you in str format means it doesn't care about the validation.
+## 1. TypedDict (Built-in): Define keys & values with type hints relevent for prevents runtime errors (helps developers know expected structure) but no strict validation (e.g., if you expect int but get str, it won’t complain)
 
-## 2. Pydantic (mostly uses in FastAPI): Data validation & parsing library and ensures the data you work with is correct, structured and safe-search. 
+- 🔹 **Example**
 
-## 3. json_schema: You can use where your project made with multiple languages like backend made in python and frontend in java-script where both side you can't use either TypedDict or Pydantic you need common format where JSON format is universally accepts any language so that purpose we use JSON schema.
+```
+from typing import TypedDict
+
+class TripPlan(TypedDict):
+    time: str
+    activity: str
+```
+
+## 2. Pydantic (Popular with FastAPI): Provide strong data validation & parsing and ensures the data you work with is correct, structured and safe-search.
+
+- 🔹 **Example**
+
+```
+from pydantic import BaseModel
+
+class TripPlan(BaseModel):
+    time: str
+    activity: str
+```
+
+## 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
