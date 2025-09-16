@@ -326,21 +326,25 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 ]
 ```
 
-## 🔹Q. Now why would we need structured output?
+##🔹Q. Now why would we need structured output?
 
 - Ans: Generally structured output will return well-defined data format (example: JSON) rather than free-form text. Now this makes really useful to work or integrate LLM's with other systems too.
 
-**Data Extraction:** For storing a data into database from key data extraction from data then we make structured data like in JSON then store in DB.
+- **Data Extraction:** For storing a data into database from key data extraction from data then we make structured data like in JSON then store in DB.
 
-**API Building:** For building API's from structured data soa anyone can use across the world.
+- **API Building:** For building API's from structured data soa anyone can use across the world.
 
-**Agents:** AI agents need structured data for accurate actions.
+- **Agents:** AI agents need structured data for accurate actions.
 
-# How many types of LLM's can generate structured output:
+##🔹How many types of LLM's can generate structured output:
 
-- The LLM's like opneai, google or other famous models can help to generate structured output from data with the help of the function name "with_structured_output" while on other hand some LLM's can't provide this facility but they provide "output_parser" function where they help to make it possible.
+- Some LLMs (e.g., OpenAI, Google, Anthropic) provide structured output options:
 
-- "with_structured_output" there is a param named "method" has provide two ways to generate structured output, 1. 'JSON mode' (while working with claude or jemini because they only support json format) 2. 'function calling' (while working with openai for calling function (agents)).
+1. `with_structured_output()` → Built-in function to enforce structured responses
+
+2. `output_parser()` → For models that don’t support strict structure natively
+
+- `with_structured_output` there is a param named "method" has provide two ways to generate structured output, 1. 'JSON mode' (while working with claude or jemini because they only support json format) 2. 'function calling' (while working with openai for calling function (agents)).
 
 - Data format before call structured output function we need format our data in three ways we can make,
 
