@@ -344,7 +344,9 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 2. `output_parser()` → For models that don’t support strict structure natively
 
-- `with_structured_output` there is a param named "method" has provide two ways to generate structured output, 1. 'JSON mode' (while working with claude or jemini because they only support json format) 2. 'function calling' (while working with openai for calling function (agents)).
+- Methods (param) of `with_structured_output` for generate structured output,
+-  1. 'JSON mode' (while working with claude or jemini because they only support json format)
+   2. 'function calling' (while working with openai for calling function (agents)).
 
 - Data format before call structured output function we need format our data in three ways we can make,
 
