@@ -300,8 +300,10 @@ These are essential in **multi-modal AI systems** (e.g., asking an AI to describ
 
 ---
 # Structured Outputs: 
+
 - We notice currently we get LLM's response (outputs) are in a unstructured format. Like look at the example
 
+- 🔹 **LLM's un-structured output:**
 ```
 User: Can we plan a trip for Paris?
 
@@ -314,12 +316,14 @@ Afternoon: Walk thru the Laure museum,
 Evening: Enjoy dinner at a Seine riverside cafe.
 ```
 
-- LLM's expected structured output:
+- 🔹 **LLM's expected structured output:**
 
-```
+```json
+[
 {"Time": "Morning", "Activity": "Visit the Eiffel tower"}
 {"Time": "Afternoon", "Activity": "Walk thru the Laure museum"}
 {"Time": "Morning", "Activity": "Enjoy dinner at a Seine riverside cafe"}
+]
 ```
 
 ## Q. Now why would we need structured output?
