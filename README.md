@@ -375,3 +375,16 @@ class TripPlan(BaseModel):
 ```
 
 ## 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
+
+- 🔹 **Example**
+
+```
+{
+  "type": "object",
+  "properties": {
+    "time": {"type": "string"},
+    "activity": {"type": "string"}
+  },
+  "required": ["time", "activity"]
+}
+```
