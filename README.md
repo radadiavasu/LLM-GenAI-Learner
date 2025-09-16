@@ -297,3 +297,44 @@ These are essential in **multi-modal AI systems** (e.g., asking an AI to describ
 - **Dynamic prompts with PromptTemplate** are powerful → reusable, validated, and ecosystem-friendly.  
 - **Multi-turn prompts** allow conversational context.  
 - **Multi-modal prompts** extend LLMs beyond text.  
+
+---
+Structured Outputs: We notice currently we get LLM's response (outputs) are in a unstructured format. Like look at the example
+
+User: Can we plan a trip for Paris?
+
+-> LLM's unstructured output:
+
+Here's a suggested planning, Morning: Visit the Eiffel tower,
+
+Afternoon: Walk thru the Laure museum,
+
+Evening: Enjoy dinner at a Seine riverside cafe.
+
+
+-> LLM's expected structured output:
+
+{"Time": "Morning", "Activity": "Visit the Eiffel tower"}
+{"Time": "Afternoon", "Activity": "Walk thru the Laure museum"}
+{"Time": "Morning", "Activity": "Enjoy dinner at a Seine riverside cafe"}
+
+Q. Now why would we need structured output?
+
+Ans: Generally structured output will return well-defined data format (example: JSON) rather than free-form text. Now this makes really useful to work or integrate LLM's with other systems too.
+
+Data Extraction: For storing a data into database from key data extraction from data then we make structured data like in JSON then store in DB.
+API Building: For building API's from large amount of extracted structured data that comes from data extraction part and those API's use anyone across the world.
+Agents: Advanced than chatbots can really helpful and needed structured output.
+
+How many types of LLM's can generate structured output:
+
+-> The LLM's like opneai, google or other famous models can help to generate structured output from data with the help of the function name "with_structured_output" while on other hand some LLM's can't provide this facility but they provide "output_parser" function where they help to make it possible.
+
+-> "with_structured_output" there is a param named "method" has provide two ways to generate structured output, 1. 'JSON mode' (while working with claude or jemini because they only support json format) 2. 'function calling' (while working with openai for calling function (agents)).
+
+Data format before call structured output function we need format our data in three ways we can make,
+
+1. TypedDict: Nothing but your data format would be in keys and values where we just need to specify what to put in keys and values. It helps where we define that what type of datatype needed with key int, str etc.. It prevents runtime error while new one programmer come and change the type but there is cons like it can't perform validation like suppose if you provide int and the value you provide value in int in str format it still gives you in str format means it doesn't care about the validation.
+
+2. Pydantic (mostly uses in FastAPI): Data validation & parsing library and ensures the data you work with is correct, structured and safe-search. 
+3. json_schema: You can use where your project made with multiple languages like backend made in python and frontend in java-script where both side you can't use either TypedDict or Pydantic you need common format where JSON format is universally accepts any language so that purpose we use JSON schema.
