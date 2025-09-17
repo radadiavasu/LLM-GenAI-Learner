@@ -250,18 +250,19 @@ LangChain also supports **multi-message conversations** with specialized classes
 - **AI Message** → The response returned by the AI.  
 
 - Example:
-```
-    from langchain_core.prompts import ChatPromptTemplate, HumanMessage, SystemMessage
+  
+```python
+ from langchain_core.prompts import ChatPromptTemplate, HumanMessage, SystemMessage
 
-    chat_template = ChatPromptTemplate.from_messages(
-        [
-            SystemMessage(content="You are a helpful AI assistant."),
-            HumanMessage(content="What is the capital of {country}?"),
-        ]
-    )
-    formatted_prompt = chat_template.format_messages(country="France")
-    # formatted_prompt will be a list of message objects:
-    # [SystemMessage(content='You are a helpful AI assistant.'), HumanMessage(content='What is the capital of France?')]
+ chat_template = ChatPromptTemplate.from_messages(
+     [
+         SystemMessage(content="You are a helpful AI assistant."),
+         HumanMessage(content="What is the capital of {country}?"),
+     ]
+ )
+ formatted_prompt = chat_template.format_messages(country="France")
+ # formatted_prompt will be a list of message objects:
+ # [SystemMessage(content='You are a helpful AI assistant.'), HumanMessage(content='What is the capital of France?')]
 ```
 
 #### Classes for Dynamic Messages  
@@ -366,7 +367,7 @@ class TripPlan(TypedDict):
 
 - 🔹 **Example**
 
-```
+```python
 from pydantic import BaseModel
 
 class TripPlan(BaseModel):
@@ -378,7 +379,7 @@ class TripPlan(BaseModel):
 
 - 🔹 **Example**
 
-```
+```json
 {
   "type": "object",
   "properties": {
