@@ -355,7 +355,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 
 - 🔹 **Example**
 
-```
+```python
 from typing import TypedDict
 
 class TripPlan(TypedDict):
