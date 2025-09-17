@@ -348,9 +348,9 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 -  1. 'JSON mode' (while working with claude or jemini because they only support json format)
    2. 'function calling' (while working with openai for calling function (agents)).
 
-## 🔹 Data Formats for Structured Outputs
+# 🔹 Data Formats for Structured Outputs
 
-# 1. TypedDict (Built-in): Define keys & values with type hints relevent for prevents runtime errors (helps developers know expected structure) but no strict validation (e.g., if you expect int but get str, it won’t complain)
+## 1. TypedDict (Built-in): Define keys & values with type hints relevent for prevents runtime errors (helps developers know expected structure) but no strict validation (e.g., if you expect int but get str, it won’t complain)
 
 - 🔹 **Example**
 
@@ -362,7 +362,7 @@ class TripPlan(TypedDict):
     activity: str
 ```
 
-# 2. Pydantic (Popular with FastAPI): Provide strong data validation & parsing and ensures the data you work with is correct, structured and safe-search.
+## 2. Pydantic (Popular with FastAPI): Provide strong data validation & parsing and ensures the data you work with is correct, structured and safe-search.
 
 - 🔹 **Example**
 
@@ -374,7 +374,7 @@ class TripPlan(BaseModel):
     activity: str
 ```
 
-# 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
+## 3. json_schema: Works across all programming languages (If you different language in front-end and different in back-end) so the it format the data in the common way.
 
 - 🔹 **Example**
 
