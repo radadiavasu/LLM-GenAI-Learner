@@ -389,3 +389,29 @@ class TripPlan(BaseModel):
   "required": ["time", "activity"]
 }
 ```
+
+---
+
+Chains: In a manual way we're doing making prompts (templates) then send it to the LLM and it invoke then it generates the output, so practically it's a way to make huge app instead the chains introduced where you just have to give input then trigger your chain and that's it, it'll make pipeline automatically , in short instead passing every single thing to generate the output use chain instead.
+
+For visualize the actual chain flow you can use: chain.get_graph().print_ascii()
+
+-> Types of chains
+
+1. Simple Chain: Normal chain as we make regularly like prompt | model | parser in chain.
+
+2. Sequential Chain: Used for performing sequential tasks like for ex, I have a input and want to generate the detailed report then from that report want to get summary, so clearly we want multiple LLM's and so for that we use like this make two templates one for detailed report on topic and another for the summary now take parser and make chain then invoke it and get the result.
+
+1. Parallel Chain: We can use this for generate multiple outputs parallelly based on the data (document) provided by the user. For ex, User want to generate notes and the quiz based on the document he provided now what we gonna do, we take the document then send it to the model_1 and generate the notes parallelly we set model_2 and generate quiz upon that and finally send both models to the model_3 for merge and generate the output.
+
+RunnableParallel: With this parallelly we can execute multiple chains.
+
+1. Conditional Chain: This can be use for mostly a condition based tasks like type of sentiment wise, for ex, for making a feedback generator let's say want to analyze customer sentiment let if positive then praise him but if for negative then say sorry / send email to the customer care team. Now most important we might get result sometimes not perfect like so we use pydantic for proper classify so always we get in a proper way not gamble or mixing because pydantic gives us the proper validation and thus parsering gives us perfect output always.
+
+RnnableBranch: It runs on the conditional way like for ex, if first_condition true then gives first chain same for second otherwise the default chain seems like if, elif, else.
+
+---
+
+Why runnables: It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
+
+If want to understand how runnable work? Then think about "Lego blocks"
