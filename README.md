@@ -415,3 +415,44 @@ RnnableBranch: It runs on the conditional way like for ex, if first_condition tr
 Why runnables: It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
 
 If want to understand how runnable work? Then think about "Lego blocks"
+
+---
+
+Types of runnables:
+
+1. Task Specific Runnables: Core langchain componenets that has been converted into runnables for standardizer and can be used in pipeline.
+
+Use case: Perform task specific operations like LLM calls, prompting, retrieval.
+
+Examples:
+
+1. ChatOpenAI(): (so it runs llm model) It's components and task specifc llm model.
+2. PromptTemplate(): It make prompts dynamically.
+3. Retriever: Retrieve the related documents.
+
+
+2. Runnable Primitives: It helps to connect & interact with tasks specific runnables so we can make AI workflows easily.
+
+Use case: They help to connect & make interactions with different runnables to interact (sequentially, parallel, conditionally etc).
+
+Examples:
+
+1. RunnableSequence: It helps to connect different runnables and form a chain for ex, if we have 2 runnables like R1 and R2 then with this we can connect them and the R2 is using R1's as a input really help full think about "deep search" in chatgpt. How each prompt connect with another and form a chain which forms multi LLM's for long & sequncial answers.
+
+2. RunnableParallel: Using for connect two different LLM's for specific topic for ex, Topic = AI -> LLM-1 -> tweet -> generate tweet -> getting output, now with same topic AI -> LLM-2 -> generate LinkedIn post -> getting output. Remember both runnables parallelly means independently executed but with same input (topic).
+
+3. RunnablePassthrough: It's return the whole input as it is in output even without modification.
+
+Use-case: foe getting original input along with output and it's sub-output. For ex, If I want to get a joke and based on the joke I want explanation along with the joke so there I can use it.
+
+4. RunnableLambda: You can able to convert python functions in runnable and if you do this then you can connect with more runnables you make chains of runnables.
+
+Example: Topic -> prompt -> LLM ->  generate output -> generate number of words.
+
+5. RunnableBranch: Uses for conditional chain like (if else).
+
+Example: email -> LLM (For classify the mood / behaviour of the mail) -> put it into branches (positive, question, negative, refund) -> do according that.
+
+Q. Why we use “|” rather than “RunnableSequence” (LCEL)?
+
+Ans: Because of easy and simplicity instead of use whole class we can use “|” although computationally faster than class.
