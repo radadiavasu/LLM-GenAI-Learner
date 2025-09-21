@@ -455,4 +455,52 @@ Example: email -> LLM (For classify the mood / behaviour of the mail) -> put it 
 
 Q. Why we use “|” rather than “RunnableSequence” (LCEL)?
 
+---
+
+RAG: RAD is a technique that combines information retrieval with language generation where model retrieves relevant documents from a knowledge base and then uses them as context to generate to generate accurate and grounded responses.
+
+
+Benefits of using RAG,
+
+1. Use of up-to-date information.
+
+2. Better privacy. -> If u want to extract document in a human friendly language from the document and give to the chatgpt then it blocks due to contextual limitations even security of your personal / private data leaks. So that's why u use RAG based app for data privacy.
+
+3. No limit of document size. -> There is no limitation of the data you're providing to the RAG agent but need good hardware for faster responses.
+
+RAG Componenets:
+
+1. Document loaders: These are components in langchain used to load data from various sources. For ex. pdf, txt, db or cloud etc. So we need standardize format before we send it to the next components like splitters, vector, stores and retrievers. Document format will be like,
+
+Document(
+   page_content = "The actual document page content.",
+   metadata = {"source": "filename.pdf", .....}
+)
+
+2. text splitters
+3. Vector stores(VectorDB)
+3. Retrievers
+
+
+-> Types of Document Loaders
+
+1.1 TextLoaders: It can be use only use .txt file to read plain text and converts them into the langchain document objects.
+
+1.2 PyPDFLoader: It can be used to convert pdf files into each page document object. Limitation is only read textual content from pdf not because use "PyPDF" module. So there are another modules like if you have pdf's with table/columns then use "PDFLumberLoader", same as want best structure and scanned/image pdfs then "UnStructurePDFLoader" or "AmazonTextractPDFLoader", need layout and image data then "PymuPDFLoader".
+
+1.3 DirectoryLoader: You can use this when you want to load multiple documents from a directory.
+
+-> "**/*.txt": All .txt files in subfolders.
+-> "*.pdf": All .pdf files from root directory.
+-> "data/*.csv": All .csv files from data folder.
+-> "**/*": All type of files any type of folders.
+
+1.4 WebBasedLoader: You can load web page contents in your langchain and then use like Q & A. So internally it uses request module for requesting URL's then beautifulsoup for HTML and extract text. We can use to extract blogs, news articles or public websites into a text readable format and static. So it doesn't work java-script heavy pages instead you can use SeleniumURLLoader for that.
+
+1.5 CSVLoader: To load csv files into langchain.
+
+2. text splitters
+3. Vector stores(VectorDB)
+3. Retrievers
+
 Ans: Because of easy and simplicity instead of use whole class we can use “|” although computationally faster than class.
