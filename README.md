@@ -457,7 +457,7 @@ Q. Why we use “|” rather than “RunnableSequence” (LCEL)?
 
 ---
 
-RAG: RAD is a technique that combines information retrieval with language generation where model retrieves relevant documents from a knowledge base and then uses them as context to generate to generate accurate and grounded responses.
+RAG: RAG is a technique that combines information retrieval with language generation where model retrieves relevant documents from a knowledge base and then uses them as context to generate to generate accurate and grounded responses.
 
 
 Benefits of using RAG,
