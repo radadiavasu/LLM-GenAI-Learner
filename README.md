@@ -395,7 +395,7 @@ class TripPlan(BaseModel):
 
 ### When building generative AI applications, instead of manually creating prompts, invoking the model, and handling responses step-by-step, Chains allow you to automate this pipeline. Chains simplify the process — you provide the input, trigger the chain, and the rest is handled automatically.
 
-** For visualize the actual chain flow you can use: 
+**For visualize the actual chain flow you can use:**
 
 ```python
 chain.get_graph().print_ascii()
