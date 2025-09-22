@@ -403,7 +403,7 @@ chain.get_graph().print_ascii()
 
 ## Types of chains
 
-**1. Simple Chain: Normal chain as we make regularly like prompt | model | parser in chain.**
+**1. Simple Chain: Normal chain as we make regularly like ```prompt | model | parser in chain.```**
 
 **2. Sequential Chain: Used for performing sequential tasks like for ex, I have a input and want to generate the detailed report then from that report want to get summary, so clearly we want multiple LLM's and so for that we use like this make two templates one for detailed report on topic and another for the summary now take parser and make chain then invoke it and get the result.**
 
