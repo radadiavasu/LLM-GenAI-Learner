@@ -323,7 +323,7 @@ Evening: Enjoy dinner at a Seine riverside cafe.
 [
 {"Time": "Morning", "Activity": "Visit the Eiffel tower"}
 {"Time": "Afternoon", "Activity": "Walk thru the Laure museum"}
-{"Time": "Morning", "Activity": "Enjoy dinner at a Seine riverside cafe"}
+{"Time": "Evening", "Activity": "Enjoy dinner at a Seine riverside cafe"}
 ]
 ```
 
