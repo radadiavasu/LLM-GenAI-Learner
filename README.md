@@ -448,17 +448,18 @@ If want to understand how runnable work? Then think about "Lego blocks"
 
 ---
 
-Types of runnables:
+## Types of runnables:
 
-1. Task Specific Runnables: Core langchain componenets that has been converted into runnables for standardizer and can be used in pipeline.
+1. Task Specific Runnables
 
-Use case: Perform task specific operations like LLM calls, prompting, retrieval.
+-   These are the core components (LLMs, prompts, retrievers) wrapped into runnables.
+They perform actual AI tasks.
 
 Examples:
 
 1. ChatOpenAI(): (so it runs llm model) It's components and task specifc llm model.
 2. PromptTemplate(): It make prompts dynamically.
-3. Retriever: Retrieve the related documents.
+3. Retriever: Fetch related documents.
 
 
 2. Runnable Primitives: It helps to connect & interact with tasks specific runnables so we can make AI workflows easily.
