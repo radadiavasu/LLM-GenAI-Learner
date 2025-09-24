@@ -450,42 +450,53 @@ If want to understand how runnable work? Then think about "Lego blocks"
 
 ## Types of runnables:
 
-1. Task Specific Runnables
+**1. Task Specific Runnables**
 
 -   These are the core components (LLMs, prompts, retrievers) wrapped into runnables.
 They perform actual AI tasks.
 
 Examples:
 
-1. ChatOpenAI(): (so it runs llm model) It's components and task specifc llm model.
-2. PromptTemplate(): It make prompts dynamically.
-3. Retriever: Fetch related documents.
+1. `ChatOpenAI()`: (so it runs llm model) It's components and task specifc llm model.
+2. `PromptTemplate()`: It make prompts dynamically.
+3. `Retriever()`: Fetch related documents.
 
+- Use when u want to build text generation, prompt dynamically and retrive docs.
 
-2. Runnable Primitives: It helps to connect & interact with tasks specific runnables so we can make AI workflows easily.
+**2. Runnable Primitives: They are helper funcs to connect & interact with tasks specific runnables They don't do AI tasks themselves, instead they define how runnables can interact.**
 
-Use case: They help to connect & make interactions with different runnables to interact (sequentially, parallel, conditionally etc).
+- Use case: They help to connect & make interactions with different runnables to interact (sequentially, parallel, conditionally etc).
 
 Examples:
 
-1. RunnableSequence: It helps to connect different runnables and form a chain for ex, if we have 2 runnables like R1 and R2 then with this we can connect them and the R2 is using R1's as a input really help full think about "deep search" in chatgpt. How each prompt connect with another and form a chain which forms multi LLM's for long & sequncial answers.
+1. RunnableSequence: It helps to connect different runnables and form a chain for ex, if we have 2 runnables like R1 and R2 then with this we can connect them and output of R2 is input of R1 which really help full think about "deep search" in chatgpt. How each prompt connect with another and form a chain which forms multi LLM's for long & sequncial answers.
 
-2. RunnableParallel: Using for connect two different LLM's for specific topic for ex, Topic = AI -> LLM-1 -> tweet -> generate tweet -> getting output, now with same topic AI -> LLM-2 -> generate LinkedIn post -> getting output. Remember both runnables parallelly means independently executed but with same input (topic).
+Example:
+- Question -> PromptTemplate -> ChatOpenAI -> Output
 
-3. RunnablePassthrough: It's return the whole input as it is in output even without modification.
+2. RunnableParallel: Using for connect two different LLM's for specific topic for ex, Topic = AI -> LLM-1 -> tweet -> generate tweet -> getting output, now with same topic AI -> LLM-2 -> generate LinkedIn post -> getting output. Remember both runnables work parallelly means independently executed but with same input (topic).
 
-Use-case: foe getting original input along with output and it's sub-output. For ex, If I want to get a joke and based on the joke I want explanation along with the joke so there I can use it.
+Example:
+- Runnable_1 = Topic -> LLM_1 -> Generate Tweet
+- Runnable_2 = Topic -> LLM_2 -> Generate Linkedin Post
 
-4. RunnableLambda: You can able to convert python functions in runnable and if you do this then you can connect with more runnables you make chains of runnables.
+3. RunnablePassthrough: It's return the whole input as it is in output even without modification and using for getting original input along output and it's sub-output.
 
-Example: Topic -> prompt -> LLM ->  generate output -> generate number of words.
+Example:
+- If I want to get a joke and based on the joke I want explanation along with the joke so there I can use it.
+
+4. RunnableLambda: You can able to convert python functions into runnable and able to give your code to LLM's workflows.
+
+Example: 
+- Topic -> prompt -> LLM ->  generate output -> generate number of words.
 
 5. RunnableBranch: Uses for conditional chain like (if else).
 
-Example: email -> LLM (For classify the mood / behaviour of the mail) -> put it into branches (positive, question, negative, refund) -> do according that.
+Example: 
+- email -> LLM (For classify the mood / behaviour of the mail) -> put it into branches (positive, question, negative, refund) -> do according that.
 
-Q. Why we use “|” rather than “RunnableSequence” (LCEL)?
-
+## Q. Why we use “|” rather than “RunnableSequence”?
+**`RunnableSequence` is class that chains runnable, but langchain introduced (LCEL) LangChain Expression Language is shortcut to connect runnable (chain) just like runnable sequence class for easier setup and provides simplicity**
 ---
 
 RAG: RAG is a technique that combines information retrieval with language generation where model retrieves relevant documents from a knowledge base and then uses them as context to generate to generate accurate and grounded responses.
