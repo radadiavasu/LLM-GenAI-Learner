@@ -545,5 +545,5 @@ Document(
 2. text splitters
 3. Vector stores(VectorDB)
 3. Retrievers
+---
 
-Ans: Because of easy and simplicity instead of use whole class we can use “|” although computationally faster than class.
