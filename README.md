@@ -235,9 +235,6 @@ This is preferred over basic Python `f-strings`.
    - Prompts can be stored in JSON or separate config files.  
    - Encourages building a clean, maintainable **prompt ecosystem** for complex projects.  
 
-## What is the difference between PromptTemplate and ChatPromptTemplate?
-- Ans is PromptTemplate is generally used for regular text-based (language) models like davnici 003 or old gpt models and these are non-structured messages because it gives one big block of text on other hand ChatPromptTemplate use in chat-based models (like ChatGPT, Anthropic, Gemini and other latest open source models) and these are roles-based models (`System`, `Human`, `AI`) makes it proper structurized in simple words you assign a roles. So if your model expect single string as a output then go for PromptTemplate otherwise ChatPromptTemplate to working with chat-models for making role-based AI agents.
-
 ---
 
 ### 2. List of Messages (Multi-turn Conversations)  
@@ -279,6 +276,9 @@ LangChain also supports **multi-message conversations** with specialized classes
 - **MessagePlaceholder**  
   - Special placeholder used inside a `ChatPromptTemplate` to dynamically insert **chat history** or **lists of messages** at runtime.  
   - Ensures the model has context across turns.  
+
+## What is the difference between PromptTemplate and ChatPromptTemplate?
+- Ans is PromptTemplate is generally used for regular text-based (language) models like davnici 003 or old gpt models and these are non-structured messages because it gives one big block of text on other hand ChatPromptTemplate use in chat-based models (like ChatGPT, Anthropic, Gemini and other latest open source models) and these are roles-based models (`System`, `Human`, `AI`) makes it proper structurized in simple words you assign a roles. So if your model expect single string as a output then go for PromptTemplate otherwise ChatPromptTemplate to working with chat-models for making role-based AI agents.
 
 ---
 
