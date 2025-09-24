@@ -495,7 +495,8 @@ Example:
 Example: 
 - email -> LLM (For classify the mood / behaviour of the mail) -> put it into branches (positive, question, negative, refund) -> do according that.
 
-## Q. Why we use “|” rather than “RunnableSequence”?
+# Q. Why we use “|” rather than “RunnableSequence”?
+
 **`RunnableSequence` is class that chains runnable, but langchain introduced (LCEL) LangChain Expression Language is shortcut to connect runnable (chain) just like runnable sequence class for easier setup and provides simplicity**
 ---
 
