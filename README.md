@@ -418,7 +418,31 @@ chain.get_graph().print_ascii()
 
 ---
 
-Why runnables: It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
+## What runnables
+
+- It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
+
+## Why Runnable
+
+**Before runnables, LangChain had different modules for different tasks (LLM calls, retrievers, tools, etc.). Each module behaved differently.**
+
+- Developers had to learn each one separately.
+
+- Combining them was frustrating and slowed down projects.
+
+- Workflows became messy and hard to maintain.
+
+👉 The LangChain community realized they needed a standardized interface for everything.
+
+So they introduced runnables:
+
+- A common format for all components.
+
+- Easy to connect, mix, and extend.
+
+- Makes it possible to build workflows that are sequential, parallel, or conditional.
+
+This change is a big reason why LangChain became so popular for GenAI apps.
 
 If want to understand how runnable work? Then think about "Lego blocks"
 
