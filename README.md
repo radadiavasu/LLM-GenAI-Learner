@@ -418,7 +418,7 @@ chain.get_graph().print_ascii()
 
 ---
 
-## What runnables
+# Runnables
 
 - It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
 
