@@ -236,7 +236,7 @@ This is preferred over basic Python `f-strings`.
    - Encourages building a clean, maintainable **prompt ecosystem** for complex projects.  
 
 ## What is the difference between PromptTemplate and ChatPromptTemplate?
-# Ans is PromptTemplate is generally used for regular text-based (language) models like davnici 003 or old gpt models and these are non-structured messages because it gives one big block of text on other hand ChatPromptTemplate use in chat-based models (like ChatGPT, Anthropic, Gemini and other latest open source models) and these are roles-based models (`System`, `Human`, `AI`) makes it proper structurized in simple words you assign a roles. So if your model expect single string as a output then go for PromptTemplate otherwise ChatPromptTemplate to working with chat-models for making role-based AI agents.
+### Ans is PromptTemplate is generally used for regular text-based (language) models like davnici 003 or old gpt models and these are non-structured messages because it gives one big block of text on other hand ChatPromptTemplate use in chat-based models (like ChatGPT, Anthropic, Gemini and other latest open source models) and these are roles-based models (`System`, `Human`, `AI`) makes it proper structurized in simple words you assign a roles. So if your model expect single string as a output then go for PromptTemplate otherwise ChatPromptTemplate to working with chat-models for making role-based AI agents.
 
 ---
 
