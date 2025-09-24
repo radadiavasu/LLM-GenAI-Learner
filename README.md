@@ -471,28 +471,28 @@ Examples:
 
 1. RunnableSequence: It helps to connect different runnables and form a chain for ex, if we have 2 runnables like R1 and R2 then with this we can connect them and output of R2 is input of R1 which really help full think about "deep search" in chatgpt. How each prompt connect with another and form a chain which forms multi LLM's for long & sequncial answers.
 
-Example:
+- Example:
 - Question -> PromptTemplate -> ChatOpenAI -> Output
 
 2. RunnableParallel: Using for connect two different LLM's for specific topic for ex, Topic = AI -> LLM-1 -> tweet -> generate tweet -> getting output, now with same topic AI -> LLM-2 -> generate LinkedIn post -> getting output. Remember both runnables work parallelly means independently executed but with same input (topic).
 
-Example:
+- Example:
 - Runnable_1 = Topic -> LLM_1 -> Generate Tweet
 - Runnable_2 = Topic -> LLM_2 -> Generate Linkedin Post
 
 3. RunnablePassthrough: It's return the whole input as it is in output even without modification and using for getting original input along output and it's sub-output.
 
-Example:
+- Example:
 - If I want to get a joke and based on the joke I want explanation along with the joke so there I can use it.
 
 4. RunnableLambda: You can able to convert python functions into runnable and able to give your code to LLM's workflows.
 
-Example: 
+- Example: 
 - Topic -> prompt -> LLM ->  generate output -> generate number of words.
 
 5. RunnableBranch: Uses for conditional chain like (if else).
 
-Example: 
+- Example: 
 - email -> LLM (For classify the mood / behaviour of the mail) -> put it into branches (positive, question, negative, refund) -> do according that.
 
 ## Q. Why we use “|” rather than “RunnableSequence”?
