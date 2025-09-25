@@ -427,9 +427,9 @@ Example:
 
 ## Why LangChain Changed the Memory System
 
-- ***Old memory system works fine (`ConversationBufferMemory`) for one user and his chat history even stored in plain text but had limits like it doesn't provide multi-role support (system, huma, AI), hard to integrate in other runnable systems and not good for mulitple users***
-- ***But sooner langchain integrate runnables in memory too just like with PromoptTemplate(), invoke(), retriever()***
-- ***Instead of storing plain text it store multi-role format for better readability and each user store in sessions with their id's (like user_1, user_2 .....n) so multiple users are allowed and manage their chat histories easily.***
+- **Old memory system works fine (`ConversationBufferMemory`) for one user and his chat history even stored in plain text but had limits like it doesn't provide multi-role support (system, huma, AI), hard to integrate in other runnable systems and not good for mulitple users**
+- **But sooner langchain integrate runnables in memory too just like with `PromoptTemplate(), invoke(), retriever()`**
+- **Instead of storing plain text it store multi-role format for better readability and each user store in sessions with their id's (like user_1, user_2 .....n) so multiple users are allowed and manage their chat histories easily.**
 
 
 ---
