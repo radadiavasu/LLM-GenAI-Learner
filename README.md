@@ -418,6 +418,21 @@ chain.get_graph().print_ascii()
 
 ---
 
+# Memory: 
+- Memory is the key component while making AI agents and these can actually save every single chat history, so you able to interact any prevoius one you don't need to tell the LLM from scratch, LLM can remember from your chat history and you'll get accurate answers.
+
+Example:
+
+- Just like the chatgpt you can see the history of every chat and when you ask to generate a report based on your all of the chats so gpt gives you whole history.
+
+## Why LangChain Changed the Memory System
+
+- ***Old memory system works fine (`ConversationBufferMemory`) for one user and his chat history even stored in plain text but had limits like it doesn't provide multi-role support (system, huma, AI), hard to integrate in other runnable systems and not good for mulitple users***
+- ***But sooner langchain integrate runnables in memory too just like with PromoptTemplate(), invoke(), retriever()***
+- ***Instead of storing plain text it store multi-role format for better readability and each user store in sessions with their id's (like user_1, user_2 .....n) so multiple users are allowed and manage their chat histories easily.***
+
+
+---
 # Runnables
 
 - It is unit of work means you give input -> process -> then we get output. It provides common interface like invoke() where you give input and get output, similarly batch() handles multiple inputs and able to give multiple answers, also stream() method extract stream output from input. So as all runnables have common interface so you can connect each runnable with other and able to execute complex workflow even you connect multiple runnable and able to interact easily.
