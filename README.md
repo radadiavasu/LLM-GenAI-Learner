@@ -568,4 +568,200 @@ Document(
 3. Retrievers
 
 ---
+# Text Splitters
 
+Text splitters can be very essential part in langchain for dividing large data like (like articles, blogs, html pages, large pdfs etc..) into smaller chunks so llm can handle them effectively.
+
+Why text splliters are important?
+
+1. Oversome model limitations: LLM's have limited storage for handling data so text spliters help to overcome this problem.
+
+2. Downstream tasks: Text splitting imrproves nearly every LLM poweered tasks like, embeddings (short chunks form in numbers can help system to find more accurate vectors), semantic search (search result point to focused info, not info) and proper summerization (prevents hallutinations).
+
+Types of text splitting
+
+1. Length based text splliting: Means you already give the length threshold for dividing chunks at how much length, like char based splliter. Only disadvantage is to strictly follow-up on threshold occur lingustic and grammatical problem on chars means stopped st desired threshold doesn't see if the char is complete or not thus semantic search is partially not recommended.
+
+2. Text Structure Based: Also known for (RecursiveTextSplitter) and one of te most use full technique. So it inheritely follow structure means organize your text in way like, first organize into paragraphs -> sentences -> words.
+
+-> For paragraph we have = "\n\n", similarly for line changes = "\n" for spaces "_" and for character = " ".
+
+3. Document Based Text Splitter: Here exactly the same as the previous (RecursiveTextSplitter) but the difference is only you can use this for different kind of document formats like html, python, java-script etc..
+
+4. Semantic Meaning Based: They split the text on the meaning based rather than length or structured based. We basically used embedding models to get the similarity score then through we get the idea if the score is low then topic is change and then it perform splitting, so basically it uses user window sliding technique. Currently this is on the experimental based in future we can use this for making strong ai agents.
+
+---
+
+# Vector Store
+
+Vector Store: Vector store is a system design store and retrieve the data represented as numerical vector, so basically when we generate embeddings we need to store somewhere but rather than using traditional db's like MySQL we can use vector store.
+
+Why vector store: Retrieve similarity score thru semantic search from whole context is far better than matching keyword.
+
+Features of Vector Store:
+
+1. Storage: You can store in your memory for quick lookups or on disk for durability for large scale use.
+
+2. Similarity Search: Helps to retrieve the highest similarity score vector.
+
+3. Indexing: Able to find nearest neighbour like provide data-structure that enables fast similarity search on high dimensional vectors.
+
+4. CRUD Operation: Performing on vectors like adding, reading, updating existing, removing outdated vectors.
+
+Use-cases:
+
+1. Semantic Search
+2. RAG
+3. Recommender Systems
+4. Image/Multimedia Search
+
+-> Difference between Vector Store and Vector Database
+
+Mostly same, difference is only that if you have storage and retriever option so that system called vector store, otherwise if you get database kind of features like distributed (means scale far you want), backup feature (in case of losing data), ACID transaction, Concurrency control (multiple user can interact), authentication to avoid third party add.
+
+In simple terms vector store is a light weight library that can focuses on storing vectors (embeddings) and performs semantic search.
+
+In simple terms vector database can store vectors with extra database features (clustering, security, metadata filtering and durability).
+
+Example of vector store: FAISS (A Facebook library)
+Example of vector database: Milvus, Qdrant, Weaviate, Pinecone.
+
+
+Vector stores in LangChain
+
+1. Chroma Vector Store
+
+Chroma is a light weight, open-source vector database that is especially friendly for local development and small-to-medium-scale production needs.
+
+2. 
+
+-> Supported Stores: LangChain integrates with multiple vector stores (FAISS, Pinecone, Chroma, Qdrant, Weaviate, etc.), gives you flexibility in scale, features and deployment.
+
+-> Common Interface: Easy to switch between on vector store to another (ex FAISS -> Pinecone (for data extend)).
+
+-> metadata handling: Provides the source means just like chatgpt gives you source links links while web search.
+
+---
+
+# Retrievers
+
+Retrievers: In langchain retrievers thar fetches the doc from data source in response to the user query. Remember each retriever are runnables.
+
+There are several types of retrieves.
+
+It depends if whether it depends on which data source is using like Wikipedia, vector store, arxiv store and what search strategy is using like maximal margin, multi-query or contextual comparison.
+
+1. Wikipedia Retriever: Basically it hit the Wikipedia API and fetch the relevant content as per given query.
+
+Example:
+
+You given a query ("Where is Paris?")
+It sends the wiki's API
+Then fetch the relevant content
+return langchain document objects.
+
+2. Vector Store Retriever: It's common retriever we use while makin RAG based agents where it fetches document from vector store based on semantic search on vector.
+
+Example:
+
+U store doc in vector store (FAISS, Chroma, Weaviete).
+each dense vector turned into dense vector an embedding vector
+so the retrieve compare the user query vector into vector store basically performs semantic search
+return relevant top k frequent result.
+
+MMR: how can we pick result which are not just similar but relevant to the other also differ from each other?
+
+3. MMR is an informational retravel algorithm design to reduce redundancy but still getting high relevance result. So it's not repeating but still u get high relevant result. So it avoid pick most relevant result first and then find least similar result.
+
+So it helps RAG pipelines with when you want full contextual window to contain diverse but still relevant information. Especially useful when documents semantically overlapping.
+
+4. Multi-Query Retriever: It helps to solve ambiguous user's query with generating multi-query and send to the LLM then retrieve top k results.
+
+Example:
+
+User: How can I stay healthy? (very broad question right?)
+
+So this have several meaning like what should I eat, how often should I exercise or how can I manage stress. Now with multi-query it generates multiple questions based on the original query then each of them find in document and merge in last show top k result.
+
+5. Contextual Compression Retriever: It improves retrieval quality where returns only relevant info rather than entire paragraph in old ways as per your query you get relevant info along with whole paragraph in short getting output but returns as it is not compressed that's what contextual compression retriever do it returns only one which is relevant to the query.
+
+-> Other Retrievers
+
+---
+
+# Problems with current LLM's and fine-tuning
+
+Current problems with LLM's
+
+1. Private Data
+2. Halucination
+3. Past trained (which can not conclude current info)
+
+The answer to overcome this problem is "Fine-Tuning".
+
+Where you give your domain specific data to the pre-training
+
+There are several ways to perform fine-tuning like "supervised training" where you provide labeled data like prompt -> desired output second technique is "continued pretraining" like unsupervised training where you give whole transcript to the LLM just how they naturally made and third technique is "RLHF" where you perform based on reinforcement learning (like human-feedback training) to learn what to do in real-world scenarios. Even there are other techniques like Lora, QLora etc..
+
+The problem with "Fine-Tunning"
+
+-> Computationally expensive when fin-tuning a whole LLM
+-> Need strong expertise means experienced AI engineers, data-scientist team for train fin-tuning model.
+-> Fine-Tuning is not useful for training on where new data comes very fast.
+
+So eventually we solve these problems to use such different techniques like,
+
+1. In-Context learning: These technique work exactly we use latest LLM's in daily life like GPT-3/4, gemini, claude or llama etc in way that you describe a problem along with approach (example) for solving a problem to LLM so based on these LLM can able to solve your problem by given your example. this learning is also called emergent property.
+
+-> So RAG is a way to make a language model (like chatgpt) with giving extra information along with your question.
+-> So the flow is like query & context -> prompt -> LLM -> Response.
+
+Total 4 steps to make RAG based systems.
+
+1. Indexing: Is useful when you connect external based knowledge thru text loaders, text splitters, generate (vectors)embeddings and perform semantic search, store vectors in vectordb, retriever.
+
+2. Retrieval: Retrieve only relevant chunks (information whose higher similarity score) rather than whole thing.
+4. Augmentation: Prompt generation based on the question and context which is called augmentation.
+5. Generation: So LLM generates the response based on the prompt which is called generation.
+
+-> So at last for fine-tuning RAG is the cheaper solution because you do with indexing rather than perform whole re-training your model.
+
+---
+
+# LangChain Tools
+
+LangChain Tools: Assume current LLM's as a human body and mind able to think and provide approaches to how to perform but not executable learning (for example book tickets, access live data, run code, interact with DB, calls API's Do reliable math etc.) like hand and legs so that tools can do it.
+
+There are two types of tools, 
+
+1. Built-In tools: built-in tools (made by community), production ready and minimal or no setup needed use with directly importing.
+
+1.1 DuckDuckGoSearchRun: Web serach via DuckDuckGo
+1.2 WikipediaQueryRun: Wikipedia summary
+1.3 PythonREPLTool: Run raw Python code
+1.4 ShellTool: Run shell commands
+1.5 RequestsGetTool: Make HTTP GET requests
+1.6 GmailSendMessageTool: Send emails via Gmail
+1.7 SlackSendMessageTool: Post message to Slack
+1.8 SQLDatabaseQuearyTool: Run DQL queries
+
+and many more
+
+2. Custom Tools: Made for special usecases or personal usecases as per the requirement.
+
+Why custom tool needed means what type of scenarioes?
+
+-> If you want interact with your own API's, implement your business specific logic, continues itractions with your databases, product or app.
+
+-> There are many ways to create a custom tools but amongst them using "@ (decorator)", strucutred & pydantic and BaseTool class are popular.
+
+How tools fit into the AI agent ecosystem?
+
+-> AI agents an LLM's powered system that can be think, make decision and action taking capabilities using external tools or API's achieve a goal.
+
+Flow: AI agent made by two things 1. LLM for reasoning and decision making and 2. Tools for action.
+
+Toolkits
+
+You can eventually combine your related tools to form a toolkit like "GoogleDriveToolKit" combines
+"GoogleDriveCreateFileTool" for upload a file, "GoogleDriveSearchTool" for earch for a file by name/content, "GoogleDriveReadFileTool for read contents of a file and so on.
