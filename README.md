@@ -696,40 +696,39 @@ So this have several meaning like what should I eat, how often should I exercise
 
 # Problems with current LLM's and fine-tuning
 
-Current problems with LLM's
+- Current problems with LLM's
 
 1. Private Data
 2. Halucination
 3. Past trained (which can not conclude current info)
 
-The answer to overcome this problem is "Fine-Tuning".
+- The answer to overcome this problem is `Fine-Tuning`.
 
-Where you give your domain specific data to the pre-training
+- Where you give your domain specific data to the pre-training
 
-There are several ways to perform fine-tuning like "supervised training" where you provide labeled data like prompt -> desired output second technique is "continued pretraining" like unsupervised training where you give whole transcript to the LLM just how they naturally made and third technique is "RLHF" where you perform based on reinforcement learning (like human-feedback training) to learn what to do in real-world scenarios. Even there are other techniques like Lora, QLora etc..
+- There are several ways to perform fine-tuning like "supervised training" where you provide labeled data like prompt -> desired output second technique is "continued pretraining" like unsupervised training where you give whole transcript to the LLM just how they naturally made and third technique is "RLHF" where you perform based on reinforcement learning (like human-feedback training) to learn what to do in real-world scenarios. Even there are other techniques like Lora, QLora etc..
 
-The problem with "Fine-Tunning"
+### The problem with "Fine-Tunning"
 
--> Computationally expensive when fin-tuning a whole LLM
--> Need strong expertise means experienced AI engineers, data-scientist team for train fin-tuning model.
--> Fine-Tuning is not useful for training on where new data comes very fast.
+- Computationally expensive when fin-tuning a whole LLM
+- Need strong expertise means experienced AI engineers, data-scientist team for train fin-tuning model.
+- Fine-Tuning is not useful for training on where new data comes very fast.
 
-So eventually we solve these problems to use such different techniques like,
+-- So eventually we solve these problems to use such different techniques like,
 
 1. In-Context learning: These technique work exactly we use latest LLM's in daily life like GPT-3/4, gemini, claude or llama etc in way that you describe a problem along with approach (example) for solving a problem to LLM so based on these LLM can able to solve your problem by given your example. this learning is also called emergent property.
 
--> So RAG is a way to make a language model (like chatgpt) with giving extra information along with your question.
--> So the flow is like query & context -> prompt -> LLM -> Response.
+- So RAG is a way to make a language model (like chatgpt) with giving extra information along with your question.
+- So the flow is like query & context -> prompt -> LLM -> Response.
 
-Total 4 steps to make RAG based systems.
+***Total 4 steps to make RAG based systems.***
 
 1. Indexing: Is useful when you connect external based knowledge thru text loaders, text splitters, generate (vectors)embeddings and perform semantic search, store vectors in vectordb, retriever.
-
 2. Retrieval: Retrieve only relevant chunks (information whose higher similarity score) rather than whole thing.
-4. Augmentation: Prompt generation based on the question and context which is called augmentation.
-5. Generation: So LLM generates the response based on the prompt which is called generation.
+3. Augmentation: Prompt generation based on the question and context which is called augmentation.
+4. Generation: So LLM generates the response based on the prompt which is called generation.
 
--> So at last for fine-tuning RAG is the cheaper solution because you do with indexing rather than perform whole re-training your model.
+- So at last for fine-tuning RAG is the cheaper solution because you do with indexing rather than perform whole re-training your model.
 
 ---
 
