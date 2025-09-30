@@ -570,23 +570,26 @@ Document(
 3. Retrievers
 
 ---
+
 # Text Splitters
 
-Text splitters can be very essential part in langchain for dividing large data like (like articles, blogs, html pages, large pdfs etc..) into smaller chunks so llm can handle them effectively.
+- Text splitters can be very essential part in langchain for dividing large data like (like articles, blogs, html pages, large pdfs etc..) into smaller chunks so llm can handle them effectively.
 
-Why text splliters are important?
+### Why text splliters are important?
 
-1. Oversome model limitations: LLM's have limited storage for handling data so text spliters help to overcome this problem.
+1. Overcome model limitations: LLM's have limited storage for handling data so text spliters help to overcome this problem.
 
-2. Downstream tasks: Text splitting imrproves nearly every LLM poweered tasks like, embeddings (short chunks form in numbers can help system to find more accurate vectors), semantic search (search result point to focused info, not info) and proper summerization (prevents hallutinations).
+2. Downstream tasks: Text splitting imrproves nearly every LLM poweered tasks like, embeddings (short chunks form in numbers can help system to find more accurate vectors), semantic search (search result point to focused info) and proper summerization (prevents hallutinations).
 
-Types of text splitting
+### Types of text splitting
 
 1. Length based text splliting: Means you already give the length threshold for dividing chunks at how much length, like char based splliter. Only disadvantage is to strictly follow-up on threshold occur lingustic and grammatical problem on chars means stopped st desired threshold doesn't see if the char is complete or not thus semantic search is partially not recommended.
 
 2. Text Structure Based: Also known for (RecursiveTextSplitter) and one of te most use full technique. So it inheritely follow structure means organize your text in way like, first organize into paragraphs -> sentences -> words.
 
--> For paragraph we have = "\n\n", similarly for line changes = "\n" for spaces "_" and for character = " ".
+- For paragraph we have = `"\n\n"`
+- similarly for line changes = `"\n"`
+- For spaces "_" and for character = `" "`.
 
 3. Document Based Text Splitter: Here exactly the same as the previous (RecursiveTextSplitter) but the difference is only you can use this for different kind of document formats like html, python, java-script etc..
 
@@ -596,11 +599,13 @@ Types of text splitting
 
 # Vector Store
 
-Vector Store: Vector store is a system design store and retrieve the data represented as numerical vector, so basically when we generate embeddings we need to store somewhere but rather than using traditional db's like MySQL we can use vector store.
+- Vector store is a system design store and retrieve the data represented as numerical vector, so basically when we generate embeddings we need to store somewhere but rather than using traditional db's like MySQL we can use vector store.
 
-Why vector store: Retrieve similarity score thru semantic search from whole context is far better than matching keyword.
+### Why vector store?
 
-Features of Vector Store:
+- Retrieve similarity score thru semantic search from whole context is far better than matching keyword.
+
+### Features of Vector Store:
 
 1. Storage: You can store in your memory for quick lookups or on disk for durability for large scale use.
 
@@ -608,40 +613,38 @@ Features of Vector Store:
 
 3. Indexing: Able to find nearest neighbour like provide data-structure that enables fast similarity search on high dimensional vectors.
 
-4. CRUD Operation: Performing on vectors like adding, reading, updating existing, removing outdated vectors.
+4. CRUD Operation: Performing on vectors like adding, reading, updating, removing outdated vectors.
 
-Use-cases:
+- Use-cases:
 
 1. Semantic Search
 2. RAG
 3. Recommender Systems
 4. Image/Multimedia Search
 
--> Difference between Vector Store and Vector Database
+### Difference between Vector Store and Vector Database
 
-Mostly same, difference is only that if you have storage and retriever option so that system called vector store, otherwise if you get database kind of features like distributed (means scale far you want), backup feature (in case of losing data), ACID transaction, Concurrency control (multiple user can interact), authentication to avoid third party add.
+- Mostly same, difference is only that if you need storage and retriever option so that system called vector store, otherwise if you get database kind of features like distributed (means scale far you want), backup feature (in case of losing data), ACID transaction, Concurrency control (multiple user can interact), authentication to avoid third party add.
 
-In simple terms vector store is a light weight library that can focuses on storing vectors (embeddings) and performs semantic search.
+- In simple terms vector store is a light weight library that can focuses on storing vectors (embeddings) and performs semantic search.
 
-In simple terms vector database can store vectors with extra database features (clustering, security, metadata filtering and durability).
+- In simple terms vector database can store vectors with extra database features (clustering, security, metadata filtering and durability).
 
-Example of vector store: FAISS (A Facebook library)
-Example of vector database: Milvus, Qdrant, Weaviate, Pinecone.
+- Example of vector store: FAISS (A Facebook library)
+- Example of vector database: Milvus, Qdrant, Weaviate, Pinecone.
 
 
-Vector stores in LangChain
+### Vector stores in LangChain
 
 1. Chroma Vector Store
 
-Chroma is a light weight, open-source vector database that is especially friendly for local development and small-to-medium-scale production needs.
+- Chroma is a light weight, open-source vector database that is especially friendly for local development and small-to-medium-scale production needs.
 
-2. 
+- Supported Stores: LangChain integrates with multiple vector stores (FAISS, Pinecone, Chroma, Qdrant, Weaviate, etc.), gives you flexibility in scale, features and deployment.
 
--> Supported Stores: LangChain integrates with multiple vector stores (FAISS, Pinecone, Chroma, Qdrant, Weaviate, etc.), gives you flexibility in scale, features and deployment.
+- Common Interface: Easy to switch between on vector store to another (ex FAISS -> Pinecone (for data extend)).
 
--> Common Interface: Easy to switch between on vector store to another (ex FAISS -> Pinecone (for data extend)).
-
--> metadata handling: Provides the source means just like chatgpt gives you source links links while web search.
+- metadata handling: Provides the source means just like chatgpt gives you source links while web search.
 
 ---
 
