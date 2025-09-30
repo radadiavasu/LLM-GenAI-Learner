@@ -554,10 +554,12 @@ Document(
 
 - 1.3 DirectoryLoader: You can use this when you want to load multiple documents from a directory.
 
+```python
 1. "**/*.txt": All .txt files in subfolders.
 2. "*.pdf": All .pdf files from root directory.
 3. "data/*.csv": All .csv files from data folder.
 4. "**/*": All type of files any type of folders.
+```
 
 - 1.4 WebBasedLoader: You can load web page contents in your langchain and then use like Q & A. So internally it uses request module for requesting URL's then beautifulsoup for HTML and extract text. We can use to extract blogs, news articles or public websites into a text readable format and static. So it doesn't work java-script heavy pages instead you can use SeleniumURLLoader for that.
 
