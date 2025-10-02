@@ -769,3 +769,56 @@ Toolkits
 
 You can eventually combine your related tools to form a toolkit like "GoogleDriveToolKit" combines
 "GoogleDriveCreateFileTool" for upload a file, "GoogleDriveSearchTool" for earch for a file by name/content, "GoogleDriveReadFileTool for read contents of a file and so on.
+
+---
+
+# LangChain Tool Calling
+
+
+Tool Binding: Tool binding is the process to connect your LLM with tools and perform input ready tasks, so that way LLM knows,
+
+1. What tools are available (name)
+2. It knows each tools via description to tell LLM what tasks your tool perform
+3. What input format to use via schema means simply you're providing input template (like "PromptTemplate").
+
+Tool Calling: is the process where your LLM decides, during conversation to execute a specific tool when needed and generate structured output.
+
+Note: LLM doesn't execute the tool it suggest you tools otherwise execution can be done via LangChain or you, it depends on your logic.
+
+Tool Execution: Tool execution is the step where the actual python (tool) is run using the input arguments as suggest tool by the LLM.
+
+Example:
+
+The LLM says:
+
+"Hey, call the "multiply" tool with a=8 and b=7
+
+Langchain or you (programmer) is actually run:
+
+multiply(a=8, b=7)
+-> and get the result: 56
+
+---
+
+# AI-Agents
+
+ReAct: ReAct is a design pattern used in AI agents can do Reasoning + Acting. It allows a LLM to perform internal reasoning (thought) with external actions (like tool use) in a structured, multi-step process. In simple meaning instead of generating an answer in one go, the model thinks step by step, deciding what to do and what needs and optionally call tools (APIs, calculators, web search, etc.) to help it.
+
+ReAct is useful for,
+
+- Multi-step problem
+- Tool-augmented tasks (web search, database lookup, etc.)
+
+Agent Executor: It is responsible to run Thought, Action and Observe loop continuously.
+
+Steps how agent executor do in back-end.
+
+1. Executor send user query along with thought trace (means monitor the sequence).
+2. Agent think and plan which tool can be useful, so in-response agent send action and action input to the executor.
+3. Now Executor go through that tool perform action as per the query and send to agent.
+4. Now executer send the user query with updated though trace (along with output) to the agent.
+5. Lops start again until gets the final answer means starting from first step.
+
+Creating Agent
+
+- Basically it requires chose react / any agent method, LLM, tools (means which tool is appropriate for performing action) and prompt.
