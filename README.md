@@ -706,7 +706,10 @@ So this have several meaning like what should I eat, how often should I exercise
 
 - Where you give your domain specific data to the pre-training
 
-- There are several ways to perform fine-tuning like "supervised training" where you provide labeled data like prompt -> desired output second technique is "continued pretraining" like unsupervised training where you give whole transcript to the LLM just how they naturally made and third technique is "RLHF" where you perform based on reinforcement learning (like human-feedback training) to learn what to do in real-world scenarios. Even there are other techniques like Lora, QLora etc..
+- There are several ways to perform fine-tuning like,
+- `supervised training` where you provide labeled data like prompt -> desired output
+- `continued pretraining` like unsupervised training where you give whole transcript to the LLM just how they naturally made
+- `RLHF` where you perform based on reinforcement learning (like human-feedback training) to learn what to do in real-world scenarios. Even there are other techniques like Lora, QLora etc..
 
 ### The problem with "Fine-Tunning"
 
@@ -734,61 +737,61 @@ So this have several meaning like what should I eat, how often should I exercise
 
 # LangChain Tools
 
-LangChain Tools: Assume current LLM's as a human body and mind able to think and provide approaches to how to perform but not executable learning (for example book tickets, access live data, run code, interact with DB, calls API's Do reliable math etc.) like hand and legs so that tools can do it.
+***Assume current LLM's as a human body and mind able to think and provide approaches to how to perform but not executable learning (for example book tickets, access live data, run code, interact with DB, calls API's, Do reliable math etc.) like hand and legs so that tools can do it.***
 
-There are two types of tools, 
+- There are two types of tools, 
 
-1. Built-In tools: built-in tools (made by community), production ready and minimal or no setup needed use with directly importing.
+### 1. Built-In tools: built-in tools (made by community), production ready and minimal or no setup needed use with directly importing.
 
-1.1 DuckDuckGoSearchRun: Web serach via DuckDuckGo
-1.2 WikipediaQueryRun: Wikipedia summary
-1.3 PythonREPLTool: Run raw Python code
-1.4 ShellTool: Run shell commands
-1.5 RequestsGetTool: Make HTTP GET requests
-1.6 GmailSendMessageTool: Send emails via Gmail
-1.7 SlackSendMessageTool: Post message to Slack
-1.8 SQLDatabaseQuearyTool: Run DQL queries
+- 1.1 DuckDuckGoSearchRun: Web serach via DuckDuckGo
+- 1.2 WikipediaQueryRun: Wikipedia summary
+- 1.3 PythonREPLTool: Run raw Python code
+- 1.4 ShellTool: Run shell commands
+- 1.5 RequestsGetTool: Make HTTP GET requests
+- 1.6 GmailSendMessageTool: Send emails via Gmail
+- 1.7 SlackSendMessageTool: Post message to Slack
+- 1.8 SQLDatabaseQuearyTool: Run DQL queries
 
-and many more
+- and many more
 
-2. Custom Tools: Made for special usecases or personal usecases as per the requirement.
+### 2. Custom Tools: Made for special usecases or personal usecases as per the requirement.
 
-Why custom tool needed means what type of scenarioes?
+***Why custom tool needed means what type of scenarioes?***
 
--> If you want interact with your own API's, implement your business specific logic, continues itractions with your databases, product or app.
+- If you want interact with your own API's, implement your business specific logic, continues itractions with your databases, product or app.
 
--> There are many ways to create a custom tools but amongst them using "@ (decorator)", strucutred & pydantic and BaseTool class are popular.
+- There are many ways to create a custom tools but amongst them using "@ (decorator)", strucutred & pydantic and BaseTool class are popular.
 
-How tools fit into the AI agent ecosystem?
+### How tools fit into the AI agent ecosystem?
 
--> AI agents an LLM's powered system that can be think, make decision and action taking capabilities using external tools or API's achieve a goal.
+- AI agents an LLM's powered system that can be think, make decision and action taking capabilities using external tools or API's achieve a goal.
 
-Flow: AI agent made by two things 1. LLM for reasoning and decision making and 2. Tools for action.
+- `Flow`: AI agent made by two things 1. LLM for reasoning and decision making and 2. Tools for action.
 
-Toolkits
+### Toolkits
 
-You can eventually combine your related tools to form a toolkit like "GoogleDriveToolKit" combines
-"GoogleDriveCreateFileTool" for upload a file, "GoogleDriveSearchTool" for earch for a file by name/content, "GoogleDriveReadFileTool for read contents of a file and so on.
+- You can eventually combine your related tools to form a toolkit like `GoogleDriveToolKit` combines
+- `GoogleDriveCreateFileTool` for upload a file, `GoogleDriveSearchTool` for earch for a file by name/content, `GoogleDriveReadFileTool` for read contents of a file and so on.
 
 ---
 
 # LangChain Tool Calling
 
-
-Tool Binding: Tool binding is the process to connect your LLM with tools and perform input ready tasks, so that way LLM knows,
+***Tool binding is the process to connect your LLM with tools and perform input ready tasks, so that way LLM knows,***
 
 1. What tools are available (name)
 2. It knows each tools via description to tell LLM what tasks your tool perform
-3. What input format to use via schema means simply you're providing input template (like "PromptTemplate").
+3. What input format to use via schema means simply you're providing input template (like `PromptTemplate`).
 
-Tool Calling: is the process where your LLM decides, during conversation to execute a specific tool when needed and generate structured output.
+- `Tool Calling`: is the process where your LLM decides, during conversation to execute a specific tool when needed and generate structured output.
 
-Note: LLM doesn't execute the tool it suggest you tools otherwise execution can be done via LangChain or you, it depends on your logic.
+- `Note: LLM doesn't execute the tool it suggest you tools otherwise execution can be done via LangChain or you, it depends on your logic.`
 
-Tool Execution: Tool execution is the step where the actual python (tool) is run using the input arguments as suggest tool by the LLM.
+- `Tool Execution`: Tool execution is the step where the actual python (tool) is run using the input arguments as suggest tool by the LLM.
 
-Example:
+- Example:
 
+```shell
 The LLM says:
 
 "Hey, call the "multiply" tool with a=8 and b=7
@@ -797,7 +800,7 @@ Langchain or you (programmer) is actually run:
 
 multiply(a=8, b=7)
 -> and get the result: 56
-
+```
 ---
 
 # AI-Agents
