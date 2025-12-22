@@ -631,8 +631,7 @@ Document(
 - In simple terms vector database can store vectors with extra database features (clustering, security, metadata filtering and durability).
 
 - Example of vector store: FAISS (A Facebook library)
-- Example of vector database: Milvus, Qdrant, Weaviate, Pinecone.
-
+- Example of vector database: Milvus, Qdrant, Weaviate, Pinecone, ChromaDB.
 
 ### Vector stores in LangChain
 
@@ -645,6 +644,13 @@ Document(
 - Common Interface: Easy to switch between on vector store to another (ex FAISS -> Pinecone (for data extend)).
 
 - metadata handling: Provides the source means just like chatgpt gives you source links while web search.
+
+### Vector DB
+
+1. FAISS - A facebook devloped library used for when you have control over your data means use FAISS when your data must stay in your local system.
+2. Pinecone - Very usefull for quick uses and easy setup with LLM prototype or client demo.
+3. Weaviate - Weaviate help to retreive advanved metadata like text/image/audio/video metadata.
+4. ChromaDB - Widely used as provides 100% local developeent & easy python setup for loading all embeddings in local db for quick RAG development locally.
 
 ---
 
