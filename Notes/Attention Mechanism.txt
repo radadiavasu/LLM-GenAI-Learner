@@ -1,0 +1,16 @@
+Attention Mechanism
+
+The problem with encoder - decoder architecture
+
+- Ideally encoding decoding works well with short sentences but it's quite challenging and too difficult for long sentences, we put a lot of burdon on encoders too understand, memorize & provide valid context to decoders that doesn't work well and that's why decoders can't get proper context although decoders want a dynamic attention on specific input of encoding but due too longer context  it forgets the actual meaning when moving forward and the output will be garbage.
+
+- Attention mechanism works like we have to pass each context vectors thru decoder's timestamp to identify which encoder's timestamp is useful, means it assigned weights (scalers) to each encoders to identify which hidden state (vectors) is useful for generating the translated word in decoders. Simply hidden state (calculate similarity score) calculate how much role of encoders previous timestamp to generate the current translated word. Also we can use ANN layers as math function to calculate hidden state because it trains automatically while we train whole encoding decoding part and it works well if we provide enough data. One more important step is researchers use bi-LSTM in encoders to improve context from any timestamp to improve translation quality.
+
+
+Bahdanau Attention
+
+- It uses neural network to calculate context vector value at decoder stage.
+
+Luong Attention
+
+- It uses dot product and actually better than bahdanau attention in terms of dynamic & better results.

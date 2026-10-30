@@ -1,0 +1,34 @@
+Encapsulation
+
+- Encapsulation uses for restrict the variables of accessibility globally.
+
+1. Global Variables: It is normal variables we can access globally
+
+2. Private Variable: It can be only access with class object outside the class and it comes with single underscore.
+
+3. Protected Variable: It can be access only within function comes with double underscore.
+
+
+Inheritance
+
+- It means we define a class and it properties can be accessible in other class we can called them child class.
+
+Multiple Inheritance: Inheritance which contains multiple parent classes and only one child class called multiple inheritance.
+
+Multilevel Inheritance: In this inheritance we have multiple child classes and only one parent class and each child class can be access another child class called multilevel inheritance.
+
+Hierarchical Inheritance: It contains only one parent class and multiple child classes can access parent class property.
+
+
+Polymorphism
+
+- Same object has different behaviour called polymorphism
+
+It has two types,
+
+1. Method Overloading: When class having multiple functions with same and different types parameter called method overloading.
+
+2. Method Overriding: When parent and child class have same function with same parameters it's called method overriding.
+
+
+

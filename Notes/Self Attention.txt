@@ -1,0 +1,29 @@
+Self Attention
+
+Q. What is most important part of NLP?
+Ans: words -> numbers means vectorization, many approaches introduced like one-hot encoding works in a way to find unique words from vocabulary then bag-of-words introduced where it calculate how many times words appear then tf/idf comes too, but then word embeddings came in picture and which unique, different and solves real pain, word embeddings have semantic meaning power which means this can actually understand the meaning of words and ranks accordingly that's how modern RAG works we use embeddings models to retrieve the n number of words based on query. But word embeddings has a problem it works in a static way (train once used many times) means it heavily put weightage on the higher accurate word rather then actual context based assignment (ability to adjust its own ranked dynamically even after training) so everything relies on your training data if you have unbalanced data then word embeddings may not work as we expect and that contextual embedding is the self attention. So in simple words self attention is the mechanism that can take static embedding as a input and can generate good contextual embeddings which are much better to use in any kind of NLP applications.
+
+points to consider while using self attention
+
+- This operation is a parallel operation but comes with one caveat which is we may lose sequential meaning but it's not affect in a way but it really boost a training speed.
+
+- There are no params involved, means we use dot product so there is no learning parameters hence there is not learning.
+
+- One problem this is used for general embedding not task specific embeddings.
+
+
+Q. How self attention works?
+
+Ans: It generates embeddings based on contextual (a word uses with which another word) basis, so self attention is context aware.
+
+
+Q. Why is Self Attention called "Self"?
+
+Ans: In other attention mechanism they calculate alignment scores between two different (word) sequences, where as in self attention you cal alignment (similarity) score between same sequence.
+
+
+Problem with self attention
+
+- It looks only at single perspective if ambiguity in sentence, and that's why it can't find out hidden meaning or multiple perceptive and that's why we use multi-head attention.
+
+- multi-head attention means we use multiple self attention which is known as multi-head attention.

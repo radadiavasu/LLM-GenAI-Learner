@@ -1,0 +1,37 @@
+Encoder Architecture of Transformers
+
+Q. What Does an Encoder Do?
+
+Ans: The Encoder is the left-hand side of the classic Transformer architecture (from the famous "Attention Is All You Need" paper).
+
+Its Goal: Take an input sentence (e.g., "The cat sat on the mat"), process every word simultaneously, and convert them into rich, context-aware vector representations that capture deep semantic relationships and word order.
+
+Inside a Single Encoder Block (The 4 Key Layers)
+
+Every single Encoder block takes your input tokens and passes them through a strict assembly line of operations. If you look at the architecture diagram, a standard encoder block contains these exact components in order:
+
+1. Input Embeddings + Positional Encoding: Combines What + Where. Raw words are turned into meaning vectors, and Positional Encodings (sine/cosine waves) are added directly to them so the model knows word order.
+
+2. The Attention Sub-Layer: Multi-Head Self-Attention. Every word looks at every other word simultaneously using Queries, Keys, and Values (Q, K, V). Multi-head attention allows the model to look at relationships from multiple perspectives at once (e.g., grammar, pronouns, subject-verb agreement).
+
+3. Add & Norm (Residual Connection + Layer Norm):Residual Connection & Layer Norm. The input is added directly to the output of the attention layer (x + Attention(x)), followed by Layer Normalization (across features) to keep training stable without being ruined by padding zeros.
+
+4. Feed-Forward Network & Second Add & Norm:Position-wise Feed-Forward Network (FFN).The vectors pass through a standard neural network layer to process the features further, followed by another Residual Connection and Layer Normalization step.
+
+
+Q. Why Stack Multiple Encoder Blocks? (e.g., 6 Layers)
+
+Ans: In the original Transformer paper, the encoder isn't just one block—it is stacked 6 times (and in massive modern LLMs, dozens or hundreds of times).
+
+
+* Layers of Understanding
+
+Think of reading a complex mystery book:
+
+-> Block 1 (First Layer): Understands basic grammar, parts of speech, and immediate neighbor words ("cat" is a noun, "sat" is a verb).
+
+-> Block 2 to 5 (Middle Layers): Connects broader context ("The cat" refers to the specific animal introduced two paragraphs ago).
+
+-> Block 6 (Deepest Layer): Grasps high-level abstract meaning, sentiment, sarcasm, and complex global context.
+
+By stacking these blocks, deep learning achieves deep semantic representation.

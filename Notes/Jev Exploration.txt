@@ -1,0 +1,64 @@
+Jev is an  AI model but not an LLM.
+
+What is Jev?
+
+Ans: Jev is an AI model built to make fast, structured decisions that software can use directly.
+
+Which means if you ask Jev a question with options to classify which one is correct it calculates in probability and give it you, so what? Any LLM can do this with structure output. True. It can. Two things change with Jev, 1. Speed 2. Cost.
+
+Why Jev? TypeSafe AI founder says "models are superhuman at chat but where is all the automation?" now in my terms this is pain point for every AI Engineers even I faced this problem while working with AI agents they're slow, costly and technically think a lot where we don't need at all.
+
+What is behind Jev? Actually we don't know means TypeSafe AI didn't provide any research papers of Jev's architecture but the concept is brilliant, "Software needs System 1 thinking, but we keep building System 2 thinking.". A deep meaning but what is system 1 and system 2? Let's understand with this analogy, imagine you're riding a bike suddenly you see a barricade in front of you what do you do? Think harder calculate the distance with equations at that time nope, you turn your bike and make safe way and that's the system 1 thinking where your mind make decision in milliseconds. Now What's your response when someone asks "where do you see yourself in next 5 years?", there you think deeply (just like current LLM's) like where currently I am?, What market says?, What's the future of my field? and lot more, here you think systematically and deep of course we have to do and that is the System 2 design. You may wonder this System 1 and System 2 idea came from a book name "Thinking Fast & Slow by Daniel Kahneman".
+
+Main benefits: 
+
+1. Speed aggressively fast in decision making.
+2. Cost is very low.
+3. Ask multiple questions in single pass.
+4. You can rely on Jev's confidence score.
+5. Can't hallucinate by design.
+
+Use cases:
+
+1. AI Agents: why? It requires lot of decision making with AI Agents, like which tool?, which model?, Is this step safe?
+2. Business Operations: why? Needs to handle multiple decisions simultaneously like support triage, claims, invoices, lead scoring.
+3. Trust & Safety: why? Moderation like content moderation, fraud, spam, jailbreak detection.
+4. Unstructured -> Structured: why? use them in logs, catalogs, tickets, call transcripts.
+5. Real-time systems: why? use for Game characters, live UI, control loops.
+
+Architecture:
+
+Verdict: [TypeSafe AI didn't provide any details of Jev's architecture so all are assumptions with connecting dots from their provided materials.]
+
+1. Transformer-based but what kind? Encoders read at once like (BERT) or Decoders write word-by-word like (GPT).
+2. Broad world Knowledge (maybe).
+3. Built for system 1 tasks.
+4. Trained on synthetic data.
+5. Non-autoregressive (most LLM's are autoregressive means generate text token-by-token).
+6. Schema-constrained output.
+7. Parallel sampler: Ask multiple questions, it answers all at once, no one by one method like LLM.
+8. RLCD (Reinforcement Learning for Calibrated Decisions) - calibrated confidence: Unlike traditional AI(RLHF) sounds incredibly confident even they're wrong about their own judgements RLCD trained to be mathematically honest if a model assigns probability of 0.8 (80%) to a specific decision then if you check 100 similar cases, it will be exactly right 80 times.
+
+Limitations:
+
+1. No independence benchmarks
+2. Text only model
+3. No web-search, no outside knowledge
+4. It (model) explains nothing (which means Jev doesn't provide the reason for selecting any answer, even not provide any reasoning tokens, you just get the confidence score and answer so it can't be useful in critical domain like banking, use for small cases)
+5. Known weak spots like not very intelligent
+6. Closed sourced model and early (means no paper, no methodology)
+
+Possibilities in future:
+
+1. Everyone copies it
+2. It vanishes into the stack
+3. One brain, many reflexes (A big model plans, cheap decisions run every step between)
+4. Dashboards for doubt
+5. A new job title
+6. Give it eyes (right now text based only video, image, audio introduce, web search in future)
+7. Too cheap to not use (A decision costs $0.00004. So you check everything, always)
+
+
+So is this the real signal? Yes not noise this is real foundational idea and I'm eager to wait what's the architecture they've used.
+
+This is theoretical part I shared later I'll share my practical findings once I get API access from TypeSafe AI.

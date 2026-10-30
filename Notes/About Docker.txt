@@ -1,0 +1,61 @@
+What is docker?
+
+- Ans: Docker is a platform where we build, run and share our container application.
+
+
+Why do we need docker?
+
+- Ans: 
+
+1. Consistency Across Environment: Without docker application behave differently during development, testing and deployment because of different environments, module-packages, and configurations.
+
+2. Isolation: It means apps may face crashes, hacking chances and conflicts because of every sites run on same machine but docker provide complete isolated environments for each sites for stable performance.
+
+3. Scalability: Apps face load challenging issues because of uncertainty of traffic and need manual interventions but with docker app runs on multiple container instances for quick and efficient scaling.
+
+
+How exactly docker is used?
+
+- Ans: 
+
+1. Docker Engine: The core component of docker platform for creating, running and managing docker containers. It has 3 parts.
+
+1.1 Docker CLI: Where we navigate with command lines to interact with docker for managing images, containers.
+1.2 REST API: For communication between docker cli and docker daemon.
+1.3 Docker Daemon: The core part which executes the requests came from REST API's (basically users).
+
+So the flow is for performing any actions we go through [Docker CLI -> <- REST API -> <- Docker Daemon].
+
+
+What is Docker Image?
+
+- Ans: It is a lightweight executable software package which everything needed to run a code like libraries, code, runtime, environment variables and more. Images are used to create docker containers which are instances of images.
+
+
+Components of image
+
+1. Base image: It is the starting point of image and it could be mini OS image like alpine, ubuntu, python/node.
+2. Application Code: It is the actual code files for run the application.
+3. Dependencies Image: It is for environment variables or configurations files.
+4. Metadata: Information image for guiding how to use and ports to use.
+
+
+Life cycle of image
+
+Creation -> Storage -> Distribution -> Execution.
+
+
+Dockerfile
+
+- Ans: It is a set of instruction to build a docker image each instructions are creating a new image also it creates new images for better consistency and productivity.
+
+
+Docker Containers
+
+- Ans: At the execution stage of the image where any one download and run the app then instance has been created in host machine which is called containers.
+
+
+Docker Registry
+
+- Ans: It is a service that stores and distributes the docker images, it acts as a repositories can push, pull and manage docker images docker hub is well known for it. Means any new developer get access of docker image from registry and perform push pull operations just like GitHub but here we use docker hub.
+

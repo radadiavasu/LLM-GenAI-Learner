@@ -1,0 +1,49 @@
+Positional Encoding
+
+Why
+
+- In self attention we have the biggest benefit is we get contextual embedding but comes with major drawback it doesn't maintain the order of words as we process parallely we can't understand which word came first i.e., vasu killed lion or lion killed vasu. These both sentences are exactly same for self attention, as there is no mechanism to understand what order words maintain in sentence and that positional encoding solves.
+
+How
+
+- We need a function which can be bounded, continues and periodic and that exactly how sinc function works in trigonometry.
+
+
+Q. Why Transformers Need Positional Encoding?
+
+Ans: Transformers process all words simultaneously in parallel (unlike sequential RNNs and LSTMs, which are slow). This allows us to maintain fast parallel processing.
+
+Without positional encoding, self-attention is "color-blind to order"—it treats "the cat chased mouse" and "the mouse chased the cat" as identical sets of words.
+
+Positional encoding gives every word a unique coordinate address using sine and cosine waves.
+
+
+* The Binary Analogy & The Wave Solution
+
+The Solution is Sine / Cosine Continuous Waves: 
+
+The solution is turning positions into vectors (like binary code).
+
+How Binary Numbers Work: The rightmost bit flips fastest. The next bit flips a little slower. The leftmost bits flip very slowly. By combining fast-flipping and slow-flipping bits, you can uniquely represent any number without repeating. 
+
+Transformer Implementation: The Transformer's positional encoding does the exact same thing, but uses smooth, continuous sine and cosine waves instead of rigid binary 0s and 1s.
+
+Instead of a single integer, every word position is assigned a unique vector of numbers between -1 and +1 using trigonometric waves.
+
+Low Dimensions (Fast Waves): High-frequency sine/cosine waves oscillate rapidly -> track local word order (e.g., Word #1 vs. Word #2).
+
+High Dimensions (Slow Waves): Low-frequency waves stretch out gently -> track long-range sentence positions.
+
+
+* Frequency Variation Across Vector Dimensions
+
+Q. How the Frequencies Change Across the Vector?
+
+Ans: If your word embedding has 512 dimensions, your positional encoding vector for a word will also have 512 dimensions.
+
+
+* Integration with Word Embeddings
+
+For every word, its positional vector is directly added to its word embedding vector.
+
+Final input vector = word embedding + positional encoding vector.

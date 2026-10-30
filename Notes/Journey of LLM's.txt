@@ -1,0 +1,39 @@
+Journey of LLM's 
+
+- For getting seq-to-seq networks we use,
+
+1. encoder-decoder
+2. attention mechanism
+3. transformers
+4. transfer learning	
+5. language models
+
+- later changed from language models to large language models as they hold larger and larger amount of data.
+
+
+1. Encoder-Decoder: high level overview is for converting one language sentence into another we sent that sentence into encoder where it tries to understand the meaning of that sentence so it goes as token-by-token or word-by-word and after summarize then we get the vector (set of numbers) which is context vector then decoder do the same job to understand and generate that summarized part into token-by-token.
+
+Q. How decoder outputs a particular words?
+
+Ans: Simple it uses SoftMax activation for decoding from vectors so, it categorizes all output language words into units and ranks them with probability and pick ones have higher probability.
+
+Note: encoder & decoder has LSTM inside their architecture (which is not necessary u can use GRU instead but ideally RNN didn't use as they have vanishing gradient problem but original paper uses LSTM).
+
+Q. How training works?
+Ans: Thru loop, see forward propagation happens on initial weights then you get output after you calculate loss thru output from true/false then we cal gradient with all trainable params like LSTM, dense, SoftMax later we use optimizer like Adam for update weights then we have learning rate to decide the speed of updating weights then finally we get new weights then loop repeats once we get new weights to initial weights.
+
+Q. What is BLUE score?
+Ans: Blue score will be use for measuring translation quality.
+
+Improvement 1- Embeddings
+
+Rather than use one hot encoding we can use embeddings instead the reason is only for trimming dimensional vectors, for ex a sentence has 3 words so one hot encoder represents like this [think, you, are] = [1,0,0], but imagine you have million words then it creates million dimensional vectors, and that's not good representation so we use embedding layer so it can fix the dimensional length part for any words, so it's low dimensional/ dense and it's a summary of words so u can easily capture summary of words.
+
+Improvement 2 - Deep LSTMs
+
+Rather than use single LSTMs which benefits long term dependency means better at long term sentences compare to short-term LSTM's. Second benefit is it understand layered representation properly like base LSTMs layers can start learn from lower words, middle layers can start from sentence level and third (top) layers starts from paragraphs means getting better on capturing hierarchy. And third benefit is learning capability will be increased when we increase the number of learning params.
+
+Improvement 3 - Reversing the input
+
+It will only work on some languages where initial words has heavy lifting but not always work.
+

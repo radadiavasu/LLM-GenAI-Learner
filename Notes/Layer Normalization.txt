@@ -1,0 +1,55 @@
+Layer Normalization in Transformers
+
+
+Q. What is Normalization & Why Do We Need It?
+
+In deep learning, normalization transforms data so it stays within a predictable range (e.g., mean of 0 and standard deviation of 1).
+
+
+Q. Why Do We Need It?
+
+Ans: 1. Stabilizes Training: Keeps extreme numbers from blowing up, preventing exploding/vanishing gradients.
+
+     2. Faster Convergence: Helps the model learn much quicker.
+
+     3. Prevents Internal Covariate Shift: Stops the inner layers of a neural network from panicking when the distribution of inputs keeps shifting during training.
+
+
+* Batch Normalization vs. Layer Normalization (The Core Difference)
+
+The biggest difference between the two is the direction in which they calculate the mean ($\mu$) and standard deviation ($\sigma$):
+
+
+1. Batch Normalization (The Column Approach):
+
+Normalizes across the batch (vertically down columns of rows).
+
+Analogy: Grading a whole classroom of students on a curve together.
+
+2. Layer Normalization (The Row Approach):
+
+Normalizes across the features/dimensions (horizontally across a single token/row).
+
+Analogy: Grading each student individually based on their own test answers.
+
+
+Q. Why Batch Normalization FAILS in Transformers (The Padding Problem)?
+
+Ans: For example,
+
+Imagine you have a batch of sentences. One sentence has 100 words, but another sentence has only 2 words and is padded with 98 zeros.
+
+If you use Batch Normalization, you compute statistics vertically down columns. Those columns get flooded with hundreds of unneeded padding zeros.
+
+The Result: The mean and standard deviation become completely skewed and artificial. They do not represent the true text data, causing the model to break down.
+
+
+Q. Why Layer Normalization Wins in Transformers?
+
+Ans: When processing the word "bank" in a sentence:
+
+1. It looks at its embedding dimensions (e.g., dimensions 1, 2, and 3).
+
+2. It calculates the mean and standard deviation strictly for that specific word.
+
+3. In result the padding zeros in other rows have zero impact on how this token is normalized. The math remains clean, pure, and accurate.

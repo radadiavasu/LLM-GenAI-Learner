@@ -1,0 +1,18 @@
+Pooling
+
+- There is an down sampling technique of feature map by selecting maximum and average values from an image. It means it just extract important features rather than whole image.
+
+Advantages
+
+- Memory efficient
+
+- Translation Variance: It just extract the feature rather than the location of that feature for better grip in learning.
+
+- Speed of training
+
+
+Disadvantages
+
+- Image Segmentation(Translation Variance): It works well in obj classification but fails where location of that feature matters like image segmentation.
+
+- We may loose critical information where down sampling happens.

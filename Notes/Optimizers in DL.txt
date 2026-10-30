@@ -1,0 +1,22 @@
+What is Optimizer
+
+Optimizer is the algorithm that uses gradients from backpropagation to iteratively update model weights so that the loss function minimized error(loss) rate and predictions become more accurate.
+
+Exponential Moving Weighted Average
+
+It is technique where you find hidden patterns(trends) from time series based data. 
+Used in time series, financial, science process, optimizer in deep learning.
+
+Adagrad
+
+- In this optimizer technique learning rate work adaptively rather than fix, so it works better than other optimizers. The biggest disadvantage of adagrad is it can not converge to the global minima due to smaller learning rate.
+
+
+RMSProp
+
+- Better than adagrad and it adapts each learning rate individually, if parameter rate has large gradients repeatedly, its learning rate reduced, which stabilize training.
+
+
+Adam
+
+- Adam combines of momentum and RMSProp, where it tracks average gradients and squared gradients, so it adapts learning rate fast and convergence becomes smoother. So that's why adam is widely used in deep neural network projects, because it reduces hyperparameter tuning and even it works well on noisy data.

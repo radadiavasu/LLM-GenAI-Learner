@@ -1,0 +1,25 @@
+Adagrad: adagrad change lr rate automatically basis on how often needed means if weight changes a lot it reduces otherwise increase think of it like take learning fast then becomes slow down too much and that is the problem.
+
+RMSProp: this solves adagrad problem with calculate average moving rate of the previous squared gradient and this makes never shrink like adagrad, think of it like rather then taking big step it takes average moving of previous gradients but may slow down the momentum pace.
+
+Adam: Mostly uses and combination of momentum + rmsprop where momentum gives faster & smooth movement & moving average of gradients from rmsprop makes it super strong to get desired output.
+
+
+Loss:
+
+Loss function is mathematical function to measure how wrong my machine-learning model is.
+
+- if low loss then model's prediction is closer to correct prediction,
+- if high loss then model is making mistakes.
+
+So loss functions help to identify the error rate in our model 
+
+MSE: It uses in regression (predicting numbers) It calculates the squared of the gradients means it penalize the bigger mistakes more heavily means it punishes outliers heavily in simple terms the model punished more when it makes large errors.
+
+MAE: Also a part of regression and a better version of MSE where it calculates the average distance between predicted and true values in simple terms It treats each mistakes equally, whether big or small.
+
+Cross-Entropy (Log-loss): Used in classification for measures how model is accurate about the correct class in simple meaning if model is confident but negative then big penalty.
+
+Binary-Cross-Entropy: Again used in classification when there are fixed two categories like (yes/no, true/false, spam/not-spam).
+
+Categorical-Cross-Entropy: Used in classification when there are more then 2 categories like (dog/cat/bird)

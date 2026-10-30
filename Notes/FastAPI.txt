@@ -1,0 +1,71 @@
+What is API
+
+- API is a communicator between frontend and backend with set of instructions and protocols for example user request come from front end then api goes to backend and database  search it and return answer to api and api deliver to user.
+
+Need for API
+
+- For letting access to our data sharing to the others we used api's api, and it contains data into json format main benefit to use api is it contains lots of information in just one single api so any one can easily access the data and extract the information easily.
+
+
+What is FastAPI
+
+- Fastapi is modern and powerful web framework for building APIs in python. FastAPI build from two internal frameworks starlette(ASGI) which manages how apis send and receives request and send back responses and pydantic for strict data validation. The main reasons to build APIs with fastapi is fast to run and fast to code.
+
+Why fast to run
+
+- Fastapi use ASGI in SGI (server gateway interface) for communication between web server and python code which better than WSGI. the reason behind this very simple WSGI follow synchronous architecture means serve request at a time and this can be slower where multiple http request came where as ASGI handle this parallelly for faster request processing.
+
+Why fast to code
+
+- Automatic validation with pydantic
+
+- Auto-generative documentations
+
+- Seamless integration and most use-full for building ML apps.
+
+
+Path & Query Parameters
+
+- Path params let us retrieve specific resource in urls using path parameters.
+
+- There is a function named "Path()" it is basically uses for metadata, description, rules and documents purposes for letting client know about parameters.
+
+- HTTPExeception() is a function to retrieve the HTTP error code when something wrong happens with your API and get the idea about the error quickly.
+
+
+Query Parameter
+
+- Query parameters are optional key, value pairs appended with URL, used to pass additional data to the server with HTTP request, this can be useful when retrieve data in filtering, sorting, searching and pagination. query param sortby() with age, gender, year etc, and order() for asc and desc.
+
+- The "?" marks with starting parameters
+
+- Each param comes with "key=value" pair.
+
+- Multiple param are separated with "&".
+
+
+Pydantic
+
+- Pydantic uses for type & data validation as python strict validation by default. Here we use two things in "Pydantic",
+
+1. Type validation
+
+Ans: In pydantic we can use Basemodel as a type validation.
+
+2. Data Validation
+
+Ans: Pydantic provide built-in features for data validation like "Emailstr" for proper email, another is "AnyUrl" for checking urls format type, same as "Field" for custom data validation like non-negatives and greater or less then and many more.
+
+- Also we can use "field_validator()" specially designed for internal data validation, for example if we want to allow only domain emails, also if we need that name should be start with capital letter then also many more...
+
+3. Computed Field
+
+Ans: This can be use where user new field creating with existing ones like bmi calculate from height and width so we can allow bmi field as a computed field.
+
+4. Nested Models
+
+Ans: This can be useful for access
+
+4. Serialization
+
+Ans: It can be helpful to export our pydantic objects means data into python dictionaries or JSON data format. Use model_dump() for dict and model_dump_json() for JSON format.

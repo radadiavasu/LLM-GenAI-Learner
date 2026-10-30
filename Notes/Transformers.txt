@@ -1,0 +1,67 @@
+Transformers
+
+- Just like ANN handles tabular data, CNN used for image/video related tasks, RNN for sequence based numerical tasks, transformers used for seq-to-seq related tasks means from input to output you get sequential data like machine translation, question answering and text summarization system. Transformers are develop to handle seq-to-seq tasks that's why it call transformers as they transform one sequence to another sequence.
+
+- In transformers we use self attention rather than LSTM which helps us to perform parallel processing that's why it can be train on larger datasets and more scalable then any other seq-to-seq architecture.
+
+- Self attention handles parallel processing of all words from sentences in encoders.
+
+
+Impact of Transformers
+
+1. Revolutionize NLP
+
+2. Democratizing AI
+
+3. Multimodal capability
+
+4. Gen AI acceleration
+
+5. Unification of deep learning
+
+
+Advantages in Transformers
+
+1. Scalability (can be train on larger & larger datasets)
+
+2. Transfer learning (fin-tuning for specific use-case)
+
+3. Multimodal input/output (not just text will be very useful for image, video, audio and so on)
+
+4. Flexible Architecture(can be design for any tasks like encode = BERT, decode = GPT and so on)
+
+5. Ecosystem (larger community is available)
+
+6. Integrated in any AI techniques (integrate any architecture to get generation related tasks like GAN + Transformers = image generations, RL + Transformers = game agents to develop strategy development and many more use-cases)
+
+
+Disadvantages of Transformers
+
+1. High computations required
+
+2. Requires lot of data (data hungry)
+
+3. Overfitting (can be possible if data has less variety)
+
+4. Energy consumption ()
+
+5. Interpretability (don't know anyone what's actually happening inside transformers completely black box)
+
+6. Bias (if you have bias in your data)
+
+7. Ethical concerns
+
+
+Future
+
+1. Improve the efficiency of tansformers in terms of trainings and model sizes. (pruning, quantization, knowledge distilation)
+
+2. Improve the multimodel capability of transformers like image, video, audio sensory data, biometric feedback, time series data and many other areas.
+
+3. Shape resposibilties like reduce biases and focus on ethical concerns.
+
+4. Domain specific transformers.
+
+5. Transformers will go multilingual too like reginal langauge based transforners.
+
+6. Interpretability improvements and find out reason fo why transformers give a reply .

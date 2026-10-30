@@ -1,0 +1,25 @@
+Losses in Perceptron
+
+- Loss function is very critical and be useful for penalizes error or loss rates while training.
+
+There are many loss functions used in classification and regression tasks
+
+1. Classification
+
+1. Binary Cross Entropy(log-loss): It is use to calculate how model confident on correct class probability. Used in sigmoid step function and examples are if output will be like spam/not-spam/, true/false, accident/not-accident etc.
+
+2. Categorical Cross Entropy: It is calculate model's actual probability and compare with thru ones and fix incorrect predictions. Used in SoftMax and example are like car/bike/bus or digit recognition.
+
+Regression
+
+2. Mean Squared Error: It calculate square of gradients and it punishes heavily on outliers for better probability and reduce error rate. Used in temperature based predictions, stock price predications, depth estimations.
+
+3. Mean Absolute Error: Rather than punishes heavily on outliers it considers all error rates equally.
+
+4. Huber Loss: Combination of MSE and MAE and ideal where having noisy data.
+
+
+Object Detection
+
+1. IOU Loss: It calculates the predicted box overlap on ground truth box more overlap leads perfect prediction. Like in IOU if it's greater than 0.5 it considered perfect otherwise poor prediction.
+
