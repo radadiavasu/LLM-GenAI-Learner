@@ -1,0 +1,26 @@
+Masked Self-Attention
+
+Q. Why Do We Need "Masking"?
+
+Ans: Unlike Encoders (which look at an entire sentence all at once), Decoders generate text autoregressively—word by word, like writing a sentence from left to right.
+
+During Training (Teacher Forcing): To make training fast and efficient, we feed the entire target sentence into the decoder all at once (in parallel).
+
+The Fatal Flaw: If the model can see all words simultaneously, when it's trying to predict the word at position 2, it can simply "cheat" and peek ahead at position 3 or 4 in the attention matrix! This is called data leakage, and it ruins the model's ability to learn how to actually generate text.
+
+The Solution: Masked Self-Attention. We place a mathematical "shield" over the future words so the model can only look backward at past words.
+
+
+* Step-by-Step: How Masking Works
+
+1. Calculate the Attention Scores (QKᵀ):Standard Dot Product. Just like normal attention, you multiply Query by Key (QKT) to get a raw match scoreboard of every word against every other word.
+
+2. Apply the Upper-Triangle Mask (-∞):The Causal Shield. Set all values in the upper-right triangle (above the diagonal matrix) to negative infinity (-∞). This represents future words that the model shouldn't see yet.
+
+3. Softmax Normalization: Erase Future Focus. When you pass -∞ through the Softmax function, it turns those future slots into exact zeros (0.0). The attention weights for future words completely vanish!
+
+4. Multiply by Value (V):Safe Weighted Sum. Multiply the masked attention weights by the Value matrix (V). The model produces a context-vector built only from past and present words—zero data leakage.
+
+Imagine your sentence has 4 words: ["I", "love", "deep", "learning"].
+
+When the model is processing word #2 ("love"), it should only be allowed to look at "I" and "love". It must not look at "deep" or "learning".

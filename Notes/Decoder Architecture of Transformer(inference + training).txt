@@ -1,0 +1,148 @@
+================================================================================
+          TRANSFORMER DECODER ARCHITECTURE (TRAINING & INFERENCE)
+================================================================================
+
+--------------------------------------------------------------------------------
+1. HIGH-LEVEL ROLE & PRIMARY FUNCTION
+--------------------------------------------------------------------------------
+The Decoder takes the context-rich vectors produced by the Encoder and generates 
+the target output sequence (e.g., translating English into Hindi).
+
+* ENCODER: Reads the full input sequence all at once without restriction.
+* DECODER: Generates target text step-by-step, controlling how tokens look at 
+  past and future context during Training vs. Inference.
+
+--------------------------------------------------------------------------------
+2. CORE COMPONENTS INSIDE ONE DECODER BLOCK (Stacked 6x)
+--------------------------------------------------------------------------------
+Each individual Decoder block contains 3 main sub-layers. Every sub-layer is 
+wrapped in a Residual Connection (Add) and Layer Normalization (Norm):
+
+  +------------------------------------------------------------------+
+  |                          OUTPUT LOGITS                           |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |                       LINEAR + SOFTMAX                           |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |                   ADD & LAYER NORMALIZATION                      |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |                 FEED-FORWARD NETWORK (FFN)                       |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |                   ADD & LAYER NORMALIZATION                      |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  Encoder Output (K, V) ---> +---------------------------------------+
+                             |            CROSS-ATTENTION            |
+                             +---------------------------------------+
+                                   ^ (Q from Decoder)
+                                   |
+  +------------------------------------------------------------------+
+  |                   ADD & LAYER NORMALIZATION                      |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |                    MASKED SELF-ATTENTION                         |
+  +------------------------------------------------------------------+
+                                   ^
+                                   |
+  +------------------------------------------------------------------+
+  |              EMBEDDINGS + POSITIONAL ENCODING                    |
+  +------------------------------------------------------------------+
+
+[Sub-Layer Breakdown]
+1. MASKED SELF-ATTENTION:
+   - Computes relationships between target tokens.
+   - Applies an upper-triangular mask (-inf) so tokens cannot see future words.
+
+2. CROSS-ATTENTION:
+   - Bridges Encoder and Decoder.
+   - Queries (Q) come from Decoder; Keys (K) & Values (V) come from Encoder.
+
+3. FEED-FORWARD NETWORK (FFN):
+   - Linear(512 -> 2048) -> ReLU -> Linear(2048 -> 512).
+   - Adds non-linear processing to token representations.
+
+--------------------------------------------------------------------------------
+3. THE 4 PRELIMINARY INPUT OPERATIONS
+--------------------------------------------------------------------------------
+Before target tokens enter the Decoder stack:
+
+1. Right-Shifting: Prepend [START] (or <sos>) token to trigger decoding.
+2. Tokenization: Break target text into individual token IDs.
+3. Embedding: Convert token IDs into dense semantic vectors (e.g., d_model = 512).
+4. Positional Encoding: Add sine/cosine wave vectors to embed word order:
+   Final Vector = Word Embedding + Positional Encoding Vector
+
+--------------------------------------------------------------------------------
+4. THE COMPLETE LAYER-BY-LAYER PIPELINE
+--------------------------------------------------------------------------------
+[Target Text] -> Embeddings + Positional Encoding
+              -> Masked Self-Attention (Q, K, V from Target)
+              -> Add & Layer Norm
+              -> Cross-Attention (Q from Decoder, K/V from Encoder)
+              -> Add & Layer Norm
+              -> Feed-Forward Network (FFN)
+              -> Add & Layer Norm
+              (Repeat across 6 stacked blocks)
+              -> Linear Layer (Projects 512-dim vector to Vocabulary Size V)
+              -> Softmax Layer (Converts scores to probability distribution)
+
+--------------------------------------------------------------------------------
+5. TRAINING MODE VS. INFERENCE MODE
+--------------------------------------------------------------------------------
++-------------------+--------------------------------+--------------------------------+
+| FEATURE           | TRAINING PHASE                 | INFERENCE PHASE                |
++-------------------+--------------------------------+--------------------------------+
+| Execution Style   | Non-Autoregressive (Parallel)  | Autoregressive (Sequential)    |
+| Input Data        | Entire sentence at once        | Starts with [START], appends   |
+|                   | (Right-shifted with [START]).  | generated words step-by-step.  |
+| Future Prevention | Causal Masking (-inf in QK^T). | Future words don't exist yet.  |
+| Teacher Forcing   | YES (uses true target tokens). | NO (uses its own predictions). |
+| Stop Condition    | Fixed target batch length.     | Generates [EOS] token.         |
+| Speed             | Fast (1 forward pass).         | Slower (1 pass per word).      |
++-------------------+--------------------------------+--------------------------------+
+
+--------------------------------------------------------------------------------
+6. STEP-BY-STEP EXAMPLES
+--------------------------------------------------------------------------------
+A. TRAINING WALKTHROUGH (Target: "Hum Dost Hain")
+- Input fed all at once: [START], "Hum", "Dost", "Hain"
+- Mask Logic:
+  * [START] can only look at [START]
+  * "Hum" can look at [START], "Hum"
+  * "Dost" can look at [START], "Hum", "Dost"
+  * "Hain" can look at all positions
+- Result: Calculates predictions for all words in a SINGLE forward pass.
+
+B. INFERENCE WALKTHROUGH (Source: "We are friends")
+- Step 1: Input = [START]                        -> Model outputs: "Hum"
+- Step 2: Input = [START], "Hum"                 -> Model outputs: "Dost"
+- Step 3: Input = [START], "Hum", "Dost"          -> Model outputs: "Hain"
+- Step 4: Input = [START], "Hum", "Dost", "Hain" -> Model outputs: [EOS] (Stop!)
+
+--------------------------------------------------------------------------------
+7. QUICK RECALL QUESTIONS
+--------------------------------------------------------------------------------
+Q1: Where do Q, K, V come from in Cross-Attention?
+A1: Q comes from the Decoder; K and V come from the Encoder.
+
+Q2: Why is training fast (parallel) while inference is slow (sequential)?
+A2: Training uses Causal Masking to process all words in 1 pass. Inference must 
+    run an autoregressive loop (1 pass per word).
+
+Q3: What turns the -inf mask entries into actual zero attention weights?
+A3: The Softmax function (Softmax(-inf) = 0.0).
+================================================================================

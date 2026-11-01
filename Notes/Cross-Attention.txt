@@ -1,0 +1,69 @@
+Cross-Attention
+
+Q. What is Cross-Attention?
+
+Ans: Cross-attention is a mechanism used in sequence-to-sequence architectures (like machine translation or text summarization) where the model needs to connect and relate two completely different input and output sequences.
+
+The Goal: When the decoder is generating a word in the target language (e.g., Hindi), cross-attention allows it to look back at the source sentence (e.g., English) and figure out which words are most relevant.
+
+
+SELF-ATTENTION vs CROSS-ATTENTION
+=================================
+
+Both share the same underlying math:
+    Attention(Q, K, V) = softmax(Q * K^T / sqrt(d_k)) * V
+
+They differ in three main ways:
+
+
+1. INPUT
+--------
+Self-Attention:
+  - Operates on a SINGLE sequence
+  - e.g., just the input text or just the output text
+
+Cross-Attention:
+  - Takes TWO sequences simultaneously
+  - e.g., Encoder memory output + Decoder output
+
+
+2. PROCESSING (Q, K, V)
+-----------------------
+Self-Attention:
+  - Queries (Q), Keys (K) and Values (V) all come from
+    the SAME sequence
+
+Cross-Attention:
+  - Queries (Q) come from the DECODER (output sequence)
+  - Keys (K) and Values (V) come from the ENCODER
+    (input sequence)
+
+
+3. OUTPUT DIMENSION
+-------------------
+Self-Attention:
+  - Produces context vectors matching the length of
+    that single sequence
+
+Cross-Attention:
+  - Produces context vectors for the OUTPUT sequence,
+    measured against the context of the INPUT sequence
+
+
+QUICK SUMMARY
+-------------
+Self-Attention  -> Q, K, V from the same sequence
+Cross-Attention -> Q from decoder; K, V from encoder
+
+
+How the Math Flows?
+
+The Query (Q): Comes from the current word the decoder is trying to generate (e.g., the Hindi word "खाना").
+
+The Key (K) & Value (V): Come from all the words processed by the encoder (e.g., the English sentence "I like eating ice cream").
+
+The Scoreboard: The decoder's Query checks all of the encoder's Keys via dot product to calculate alignment scores.
+
+The Result: Softmax turns these scores into weights, and multiplying by the Value vectors gives a rich context vector showing precisely how the output token connects back to the source text.
+
+Real-World Use Cases: Cross-attention is vital whenever inputs and outputs span different sequences or modalities:Machine Translation: English text -> French text.Text Summarization: Long article -> Short summary paragraph.Multi-Modal AI: Image-to-Text (Image captioning) or Text-to-Image generation.
