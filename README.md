@@ -654,6 +654,70 @@ Document(
 
 ---
 
+# RAG Optimization & Evaluation
+
+## Part 1: RAG Optimization
+
+### What is RAG Optimization?
+RAG Optimization is the process of improving the pipeline—from how raw documents are stored to how the LLM generates the final response—so the system produces accurate, relevant answers quickly and cheaply.
+
+### Why do we need Optimization?
+Standard RAG breaks easily in production:
+* Retrievers pull noisy or irrelevant documents.
+* Vector search misses exact keyword matches (serial numbers, names).
+* LLMs hallucinate or ignore important context buried in the middle of long texts.
+
+### How do we Optimize? (Stage-by-Stage)
+
+#### A. Retrieval-Side Optimization (Fixing the Input)
+1. **Semantic Chunking**
+   * *How:* Split text at natural topic boundaries instead of arbitrary character counts.
+   * *Impact:* Keeps context intact so sentences aren't cut in half.
+2. **Hybrid Search (Vector + BM25)**
+   * *How:* Run semantic vector search and exact keyword search simultaneously, then merge results.
+   * *Impact:* Handles both conceptual queries and exact part numbers/acronyms flawlessly.
+3. **Reranking (Cross-Encoders)**
+   * *How:* Pass the top 50 search results through a dedicated reranker model to re-order them.
+   * *Impact:* Guarantees the absolute most relevant chunk sits at Position #1 for the LLM.
+
+#### B. Generation-Side Optimization (Fixing the Output)
+1. **Query Rewriting / Expansion**
+   * *How:* Use a fast LLM to clean up vague user prompts before searching.
+   * *Impact:* Improves retrieval quality by turning messy user queries into search-optimized prompts.
+2. **System Prompt Guardrails**
+   * *How:* Explicitly instruct the model to say "I don't know" if context is missing.
+   * *Impact:* Drastically reduces confident hallucinations.
+
+### What Impact do we get from Optimization?
+Higher retrieval precision, lower LLM latency/token costs, and significantly higher answer quality.
+
+---
+
+## Part 2: RAG Evaluation
+
+### What is RAG Evaluation?
+RAG Evaluation is the systematic testing and measurement of a RAG pipeline's performance to ensure answers are factually correct, grounded, and relevant to user queries.
+
+### Why do we need Evaluation?
+* **Pipelined Complexity:** When a RAG system gives a wrong answer, you can't fix it unless you know *which* part failed (Did the retriever fetch bad data, or did the LLM hallucinate?).
+* **Scale:** You cannot manually read thousands of production logs to verify quality every time you tweak code or prompts.
+
+### How do we Evaluate?
+
+#### 1. The RAG Triad (The Framework)
+We split evaluation into three core metrics:
+* **Context Relevance:** Did the retriever fetch clean, relevant data?
+* **Groundedness (Faithfulness):** Is the answer strictly derived from the context without outside hallucinations?
+* **Answer Relevance:** Does the response directly address what the user actually asked?
+
+#### 2. LLM-as-a-Judge / Ragas (The Automated Execution)
+* *How:* Pass the Query, Context, and Generated Answer to an automated framework (like Ragas). A secondary LLM breaks the answer into individual factual claims, cross-references them against source chunks, and calculates scores from `0` to `1`.
+* *Impact:* Enables automated, reference-free testing on production logs to catch regressions instantly.
+
+### What Impact do we get from Evaluation?
+Pinpoint visibility into pipeline bottlenecks, data-backed confidence when making code/model updates, and prevention of hallucinated answers reaching production users.
+---
+
 # Retrievers
 
 Retrievers: In langchain retrievers thar fetches the doc from data source in response to the user query. Remember each retriever are runnables.
