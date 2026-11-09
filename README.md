@@ -721,129 +721,85 @@ Instant visibility into bottlenecks, data-backed confidence when making pipeline
 
 # Types of RAG
 
-## Part 1: Standard RAG Architectures
-
-### 1. Naive RAG (Baseline)
-* **What is it?** The baseline, 3-step pipeline: **Retrieve $\rightarrow$ Stuff Context into Prompt $\rightarrow$ Generate**.
-* **Why do we need it?** Fast to set up for simple prototypes, internal hackathons, or basic search over small static text files.
-* **How does it work?**
-  1. Embed user query using a standard embedding model.
-  2. Search vector database for top-$K$ nearest chunks.
-  3. Paste chunks into system prompt template and send to LLM for final response.
-* **What Impact do we get?** Lowest setup complexity, minimal code overhead, and immediate time-to-market for simple MVPs.
-* **Limitations & Trade-offs:** High failure rate in production due to context noise, inability to find exact keyword matches (serial numbers/codes), and "lost-in-the-middle" hallucinations.
+## 1. Naive RAG (The Simple Baseline)
+* **What it is:** The basic 3-step setup: **Search $\rightarrow$ Paste into Prompt $\rightarrow$ Generate Answer**.
+* **Why use it:** It's the quickest and easiest way to build a quick test version or simple prototype.
+* **The Problem:** It often fails in real applications because it brings in irrelevant text (noise), misses exact matches (like serial numbers), and confuses the AI.
 
 ---
 
-### 2. Advanced RAG (Optimization-Heavy)
-* **What is it?** Naive RAG enhanced with pre-retrieval (rewriting, semantic chunking) and post-retrieval (reranking, context compression) steps.
-* **Why do we need it?** Overcomes the accuracy, noise, and retrieval failure bottlenecks of Naive RAG in enterprise applications.
-* **How does it work?**
-  1. *Pre-Retrieval:* Cleans and expands the raw user prompt before hitting the database.
-  2. *Retrieval:* Runs hybrid search (dense vectors + sparse keywords).
-  3. *Post-Retrieval:* Reranks initial top-50 results to place the best chunk at #1 and compresses prompt noise.
-* **What Impact do we get?** Significantly higher retrieval precision, lower hallucination rates, and predictable performance on complex domain data.
-* **Limitations & Trade-offs:** Increased end-to-end latency (adds pre-processing and cross-encoder steps) and higher engineering maintenance.
+## 2. Advanced RAG (Making Search More Accurate)
+* **What it is:** A smarter version of basic RAG that cleans up your search before and after querying the database.
+* **Why use it:** It solves accuracy problems and reduces AI hallucinations.
+* **How it works:**
+  1. Re-phrases the user's question before searching.
+  2. Uses both keyword search and semantic vector search (Hybrid Search).
+  3. Reranks the search results so the single best answer is at the very top.
 
 ---
 
-### 3. Modular RAG (Component-Driven)
-* **What is it?** A decoupled system where distinct functional modules (Vector Search, SQL DB, Web API, Knowledge Graph) are invoked dynamically based on query type.
-* **Why do we need it?** Production enterprise systems must handle heterogeneous data sources (unstructured PDFs, relational databases, live web streams).
-* **How does it work?**
-  1. User query enters a **Query Router** (classifier or LLM decision engine).
-  2. Router identifies query intent and routes to the appropriate pipeline module (e.g., SQL engine for financial tables, Vector DB for PDFs).
-  3. Merges output into a synthesized LLM prompt.
-* **What Impact do we get?** Extreme architectural flexibility; enables a single AI assistant to query multiple distinct data stores.
-* **Limitations & Trade-offs:** High operational complexity—requires building and maintaining separate retrieval tools and router models.
+## 3. Modular RAG (Routing to Different Data Types)
+* **What it is:** A system that sends different types of questions to different databases.
+* **Why use it:** Real companies store data in many formats (SQL tables, PDFs, web pages).
+* **How it works:** A "Router" looks at the question. If it's about numbers, it sends it to a SQL database. If it's about document text, it sends it to a Vector database.
 
 ---
 
-### 4. Multi-Hop RAG (Iterative Retrieval)
-* **What is it?** An iterative pipeline that executes multiple sequential retrieval steps to gather disparate facts before generating an answer.
-* **Why do we need it?** Single-pass retrieval fails when an answer requires connecting facts scattered across separate documents (e.g., *"What is the revenue of the company that acquired Startup X?"*).
-* **How does it work?**
-  1. *Hop 1:* Search for "Startup X" $\rightarrow$ retrieve chunk saying "Acquired by Acme Corp".
-  2. *Sub-query:* Generate new query *"What is Acme Corp's revenue?"*
-  3. *Hop 2:* Search for "Acme Corp revenue" $\rightarrow$ retrieve financial figure.
-  4. *Synthesize:* Combine facts from both hops into final response.
-* **What Impact do we get?** Enables complex cross-document reasoning and logical synthesis that single-pass RAG cannot handle.
-* **Limitations & Trade-offs:** High query latency due to sequential retrieval cycles, plus potential error propagation if the first hop retrieves wrong data.
+## 4. Multi-Hop RAG (Connecting the Dots Across Files)
+* **What it is:** A multi-step search that looks up facts one after another to answer a single question.
+* **Why use it:** A simple search fails when an answer requires connecting information scattered across multiple documents.
+* **Example:** To answer *"What is the revenue of the company that bought Startup X?"*, Step 1 finds who bought Startup X (Acme Corp). Step 2 then searches for Acme Corp's revenue.
 
 ---
 
-### 5. Agentic RAG (Autonomous Loop)
-* **What is it?** An AI Agent equipped with RAG tools that operates in a self-directed loop of **Plan $\rightarrow$ Retrieve $\rightarrow$ Evaluate $\rightarrow$ Re-try $\rightarrow$ Act**.
-* **Why do we need it?** Standard RAG blindly accepts whatever text the database returns. Agentic RAG evaluates whether retrieved chunks are good enough and takes corrective action if they aren't.
-* **How does it work?**
-  1. Agent receives query and selects a retrieval tool.
-  2. Evaluates fetched results against the query.
-  3. If context is insufficient or noisy, autonomously rewrites the search query or switches data sources.
-  4. Once satisfied, generates and verifies the final answer.
-* **What Impact do we get?** Maximum autonomy and resilience on complex, open-ended technical workflows.
-* **Limitations & Trade-offs:** Non-deterministic execution paths, high latency, and risk of infinite loops or high API costs if guardrails fail.
+## 5. Agentic RAG (Self-Checking and Fixing)
+* **What it is:** An AI agent that checks its own search results and fixes them if they aren't good enough.
+* **Why use it:** Standard RAG blindly accepts whatever search results come back. Agentic RAG double-checks the results before answering.
+* **How it works:** It searches for an answer, evaluates if the context is helpful, and if it isn't, it rewrites the search term or tries another source.
 
 ---
 
-## Part 2: Specialized RAG Patterns
-
-### 1. Graph RAG
-* **What is it?** Combining Knowledge Graphs (Nodes = Entities, Edges = Relationships) with text chunk retrieval.
-* **Why do we need it?** Standard vector search fails on broad, dataset-wide questions (e.g., *"Summarize overall risk trends across all 50 vendor contracts"*).
-* **How does it work?**
-  1. An LLM parses raw text during ingestion to build an entity-relationship Knowledge Graph and group nodes into semantic communities.
-  2. At query time, retrieves connected subgraphs and community summaries rather than standalone paragraphs.
-* **What Impact do we get?** Enables global dataset synthesis, multi-entity mapping, and 100% explicit factual traceability.
-* **Limitations & Trade-offs:** Extremely expensive compute costs to construct and maintain Knowledge Graphs using LLMs.
+## 6. Graph RAG (Understanding Relationships)
+* **What it is:** Combines text search with Knowledge Graphs (maps showing how entities connect to each other).
+* **Why use it:** Regular vector search fails on big, high-level questions like *"What are the common risks across all 50 vendor contracts?"*
+* **How it works:** It links people, places, and facts into a web of relationships so the AI can summarize big picture patterns.
 
 ---
 
-### 2. Self-RAG (Self-Reflective RAG)
-* **What is it?** An architecture using special internal reflection tokens to decide *if*, *when*, and *how* external data should be retrieved.
-* **Why do we need it?** Baseline RAG retrieves data unconditionally for every prompt—even simple greetings—wasting latency and injecting unnecessary noise.
-* **How does it work?** The LLM outputs special reflection tokens during generation:
-  * `[Retrieve]`: Determines if retrieval is required.
-  * `[ISREL]`: Evaluates if retrieved chunks are relevant.
-  * `[ISSUP]`: Verifies if generated claims are supported by context.
-* **What Impact do we get?** Eliminates unnecessary retrieval calls, saves latency/tokens, and self-corrects bad output dynamically.
-* **Limitations & Trade-offs:** Requires specialized fine-tuned models or complex multi-prompt reflection loops.
+## 7. Self-RAG (Deciding When to Search)
+* **What it is:** A model that decides if it even *needs* to search before doing so.
+* **Why use it:** Searching a database for simple greetings (like "Hello") wastes time and money.
+* **How it works:** The model uses internal checks to decide when external search is necessary and when it can answer on its own.
 
 ---
 
-### 3. Vector-less RAG (Lexical / Knowledge-Based)
-* **What is it?** A RAG pipeline that completely bypasses dense vector embedding models.
-* **Why do we need it?** Dense embedding models can be expensive to host, suffer from "vector drift" on specialized code/domain terms, and act as black boxes.
-* **How does it work?** Relies strictly on sparse keyword indices (BM25, Elasticsearch) or explicit Graph DB schemas to fetch context deterministically.
-* **What Impact do we get?** Zero embedding costs, 100% explainable retrieval, and perfect accuracy on exact code strings, serial numbers, and acronyms.
-* **Limitations & Trade-offs:** Fails to recognize conceptual synonyms (e.g., struggles to link "automobile" with "car").
+## 8. Vector-less RAG (Exact Keyword Match)
+* **What it is:** RAG that completely skips vector embeddings and uses exact keyword indexing (like BM25).
+* **Why use it:** Vector search struggles with exact code strings, part numbers, SKUs, and acronyms.
+* **How it works:** It looks for exact word and code matches rather than looking for general meanings.
 
 ---
 
-### 4. Corrective RAG (CRAG)
-* **What is it?** A safety-net architecture that evaluates retrieved document quality *before* passing context to the generator, triggering fallback actions if needed.
-* **Why do we need it?** Prevents "garbage in, garbage out" when internal vector databases lack the required information.
-* **How does it work?** An evaluator model checks retrieved context confidence:
-  * *High Confidence:* Pass directly to generator.
-  * *Low Confidence:* Discard context and fallback to web search (Tavily, Google API).
-  * *Ambiguous Confidence:* Combine internal chunks with external web search results.
-* **What Impact do we get?** Prevents context poisoning and handles out-of-domain queries gracefully without hallucinating.
-* **Limitations & Trade-offs:** Requires external search API integrations and adds evaluation step latency.
+## 9. Corrective RAG / CRAG (Fallback Safety Net)
+* **What it is:** A system that evaluates search quality and falls back to a web search if your internal data doesn't have the answer.
+* **Why use it:** Stops the AI from making things up (hallucinating) when your private database lacks the answer.
+* **How it works:** If confidence in internal search results is low, it automatically searches the public web instead.
 
 ---
 
-## Part 3: Architecture Trade-off Matrix
+## Quick Architecture Summary Table
 
-| Architecture | Best Used For | Primary Benefit | Main Trade-off / Limitation |
+| Architecture | Best Used For | Main Advantage | Main Limitation |
 | :--- | :--- | :--- | :--- |
-| **Naive RAG** | Prototypes & MVPs | Fast setup, low code complexity | High hallucination & context noise risks |
-| **Advanced RAG** | Enterprise QA systems | High retrieval precision, low noise | Increased latency & pipeline complexity |
-| **Modular RAG** | Heterogeneous datasets | Dynamically routes between SQL/Vector/Web | Complex routing logic & tool maintenance |
-| **Multi-Hop RAG** | Multi-document reasoning | Connects scattered facts across files | High sequential retrieval latency |
-| **Agentic RAG** | Autonomous complex tasks | Self-evaluates and self-corrects | Non-deterministic, potential cost loops |
-| **Graph RAG** | Global dataset summaries | Multi-entity relational mapping | Expensive graph construction costs |
-| **Self-RAG** | Selective search needs | Reduces unnecessary search calls | Requires custom models or complex prompts |
-| **Vector-less RAG** | Code / Serial # lookups | Zero embedding cost, 100% exact match | Misses semantic synonyms |
-| **CRAG** | Public + Private data | Fallbacks to web search when DB fails | Requires web search APIs & latency |
+| **Naive RAG** | Prototypes & MVPs | Fast and easy to set up | High risk of noise & mistakes |
+| **Advanced RAG** | Accurate Enterprise QA | High precision & low noise | Slower (due to extra processing) |
+| **Modular RAG** | Complex Data Systems | Handles SQL, PDFs, and Web together | Harder to build and maintain |
+| **Multi-Hop RAG** | Cross-document facts | Connects facts across files | Takes more time (multiple searches) |
+| **Agentic RAG** | Independent tasks | Self-evaluates and self-corrects | Can be unpredictable or costly |
+| **Graph RAG** | Big-picture summaries | Maps entity relationships | Expensive to process and build |
+| **Self-RAG** | Fast conversation | Avoids unnecessary searches | Complex setup |
+| **Vector-less RAG** | Code & Serial numbers | 100% exact keyword accuracy | Misses words with similar meanings |
+| **Corrective RAG** | Handling unknown topics | Uses web search if database fails | Requires external search APIs |
 
 ---
 
