@@ -704,18 +704,21 @@ RAG Evaluation is the systematic testing and measurement of a RAG pipeline's per
 
 ### How do we Evaluate?
 
-#### 1. The RAG Triad (The Framework)
-We split evaluation into three core metrics:
-* **Context Relevance:** Did the retriever fetch clean, relevant data?
-* **Groundedness (Faithfulness):** Is the answer strictly derived from the context without outside hallucinations?
-* **Answer Relevance:** Does the response directly address what the user actually asked?
+### How do we Evaluate? (The 4 RAG Triad Metrics)
 
-#### 2. LLM-as-a-Judge / Ragas (The Automated Execution)
-* *How:* Pass the Query, Context, and Generated Answer to an automated framework (like Ragas). A secondary LLM breaks the answer into individual factual claims, cross-references them against source chunks, and calculates scores from `0` to `1`.
-* *Impact:* Enables automated, reference-free testing on production logs to catch regressions instantly.
+#### A. Retrieval Stage Metrics (Evaluating the Search)
+1. **Context Precision:** Measures if the most relevant chunks sit at the top of the search results (low noise at the top).
+2. **Context Recall:** Measures if the retriever fetched *all* necessary facts needed to answer the question (completeness of data).
 
-### What Impact do we get from Evaluation?
-Pinpoint visibility into pipeline bottlenecks, data-backed confidence when making code/model updates, and prevention of hallucinated answers reaching production users.
+#### B. Generation Stage Metrics (Evaluating the LLM Output)
+1. **Faithfulness (Groundedness):** Measures if the generated answer relies *strictly* on the retrieved chunks without making up outside facts.
+2. **Answer Relevance:** Measures if the response directly answers the user's original query (no rambling or evasive text).
+
+#### Execution: LLM-as-a-Judge (e.g., Ragas)
+* *Mechanism:* An automated framework passes the Query, Context, and Answer to an evaluator LLM. The judge breaks the answer into atomic factual claims, checks them against the context, and scores each metric from `0` to `1`.
+
+### What Impact do we get?
+Instant visibility into bottlenecks, data-backed confidence when making pipeline changes, and automated detection of hallucinations before they hit production users.
 ---
 
 # Retrievers
