@@ -702,8 +702,6 @@ RAG Evaluation is the systematic testing and measurement of a RAG pipeline's per
 * **Pipelined Complexity:** When a RAG system gives a wrong answer, you can't fix it unless you know *which* part failed (Did the retriever fetch bad data, or did the LLM hallucinate?).
 * **Scale:** You cannot manually read thousands of production logs to verify quality every time you tweak code or prompts.
 
-### How do we Evaluate?
-
 ### How do we Evaluate? (The 4 RAG Triad Metrics)
 
 #### A. Retrieval Stage Metrics (Evaluating the Search)
