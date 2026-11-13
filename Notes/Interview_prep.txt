@@ -1,0 +1,129 @@
+Q. Why do we convert models to ONNX and TensorRT?
+
+Ans: PyTorch carries heavy Python runtime overhead because Python orchestrates every layer step-by-step. By converting to ONNX, we save the model as a static blueprint and run it using ONNX Runtime (written in C++). This removes the Python bottleneck, shrinks the deployment size, and lets the C++ engine optimize the entire graph at once and TensorRT goes one step further by compiling that graph directly into custom machine code for a specific NVIDIA GPU. 
+
+
+Q. What is precision, recall & F1 score?
+
+Ans: True positives out of actual positives which is precision, and model's predicted true positives out of false positives which is recall and balance of precision and recall both is F1 score.
+
+
+Q. What’s the difference between underfitting and overfitting? How would you detect and handle each in practice?
+
+Ans: Both are ML concepts where underfitting is the model error where your training and validation accuracy is very low because of the very simple complexities, limited data, high bias, not getting enough epochs etc. So improving those areas prevents to underfitting the model, now overfitting is also the common problem CNN related tasks where model perform well on training data but not testing data this caused by very relatable problems like not enough data (if not possible then increase by augmentation), poor optimization techniques, increase training time and regularization so by improving those areas we eventually overcome this problem.
+
+
+Q. Difference between Classification & Regression.
+
+Ans: Both are the part of supervised learning so classification is the most common for the tasks for image / video processing related tasks python already provide some built in modules like open-cv and YOLO for excessively use for detection / classify the objects like car, bike, plane etc. / segmentation or could be object related tasks, so same concept but in advance in dee-learning is cnn which is convolutional natural network. Now regression is generally use for series based prediction related tasks where pattern matching is required like predict the current price of this share from the previous prices see? so it learns from the past data
+
+
+Q. What’s cross-validation and why is it used?
+
+Ans: Cross-validation checks how models performs on un-seen data (testing data) when by dividing the dataset into multiple parts. And this is useful to check how our model behaves on different data so that way we can check the performance of the model and evaluate the accuracy or any improvements needed or not like prevent overfitting / underfitting if get.
+
+
+Q. What’s the ROC curve and AUC score?
+
+Ans: ROC curve shows graph represents of model's predictions on binary classifier that shows true positivity vs false positivity.
+
+AUC (Area Under Curve) means model's performance: AUC = 1 is perfect & AUC = 0.5 is random guess, using in binary classifiers to evaluate (spam/not-spam).
+
+
+Q. What’s the difference between bagging and boosting?
+
+Ans: Both are ensemble techniques (combine models for better accuracy).
+
+1. Bagging(Bootstrap Aggregation): Main goal is to reduce variance (overfitting), trains many models in parallel from random subsets averages their result. Examples: Random Forest
+
+2. Boosting: Main goal is to reduce bias (underfitting), here where each model fixes from previous model's mistakes. Examples: XGBoost, AdaBoost
+
+
+Q. If your dataset is very small, what are some strategies you can use to still train an effective model?
+
+Ans: As per my experience I achieve the best accuracy by data augmentation where I have limited data for accident vehicles, so firstly I apply pure data augmentation technique to extend my 2K dataset to 7K with flipping, rotating and even extract accident vehicles from other images after removing their background I put only accident vehicles image to get ample quantities of data and now my current model is much capable to detect even a scratch.
+
+
+Q. Explain regularization techniques (L1, L2, Dropout, Early Stopping). When would you prefer one over another?
+
+Ans: All techniques are useful to overcome overfitting or underfitting type of problems and helps to improve overall accuracy where we use several techniques like L1 forced weights to become zero useful for feature selection but ideally not recommended because it might reduce the accuracy and useful for simpler complexity but where L2 is recommended where it's convert the weights closest to zero but not zero means squared of weights, now dropout is of the useful technique to prevent overfitting problem and the early stopping is the feature where it force stop the model where the accuracy is not improving and the loss is balanced or getting high.
+
+Ideally I choose mixing techniques as per the problem I get if I get overfitting then I go through dropout, regularization technique to overcome this problem and early stopping is the technique to stop training where accuracy not improved.
+
+
+Q. How would you handle class imbalance in an object detection task?
+
+Ans: It is the common problem while dealing with object detection related tasks even I faced this problem where I have 18 class and some of them have very low amount of data but further more I make improve with adding more data and added more augmented images, while I read some of the concept like oversampling for increase the number of minority class samples, where down-sampling can reduce them to balance the data but not implement because it augmentation solve the problem.
+
+
+Q. You added more data, but your model accuracy didn’t improve. What could be the reasons?
+
+Ans: There are several reasons like overfitting or underfitting problem is the common, poor quality of data, lack of optimization and in proper regularization techniques can cause problems.
+
+
+Q. Explain data augmentation techniques in object detection (how they differ from classification).
+
+Ans: data augmentation is really helpful even work for me most of the time where I implement two types of augmentations one is to normally flipping, rotating, left & right and another is I used for accident detection tasks where data is limited and extend with taking only accident images, remove background and put directly on my normal images and labeled them. Now the only difference between classification and augmentation is classification is the type where useful for identify the objects and augmentation is used for improve accuracy of those identified objects.
+
+
+Q. Explain how you would implement real-time detection using OpenCV with YOLO.
+
+Ans: I used both one for when I trained my model with yolo and OpenCV for testing how model's accurate on detecting those objects. where I test my model on videos to calculate the overall accuracy, although with OpenCV I make detection in zone wise means on 3 lanes I put zones and where vehicles came I put bounding box on them with my own yolo model even I used OpenCV for save detection video or images for showing my seniors that how it performs.
+
+
+Q. What’s the difference between supervised and unsupervised learning?
+
+Ans: Both are main types of ML.  
+
+- Supervised learning: we train the model with labeled data (means we already know input and output). Used in classification and regression.
+
+For Example: Predicting car price (regression) or classifying cat vs dog (classification).
+
+- Unsupervised learning: we train with unlabeled data to find hidden patterns or groups.
+
+For Example: Customer segmentation, grouping similar images.
+
+
+Q. What is bias–variance tradeoff?
+
+Ans: This is about finding balance between simplicity and complexity of the model.
+
+if High Bias: Means model is too fitting. Underfitting problem so it can't learn well.
+
+if High Variance: Means model is too complex. Overfitting problem where it sticks with training data means it performs well on training data but not on un-seen (validation) data.
+
+So we tune model complexity add regularization techniques like L1/L2, add optimization techniques like dropout or random forest, use cross-validation on data, so we get low variance & low bias.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q. What is a Retrieval-Augmented Generation (RAG) pipeline? Why is it important?
+
+Ans: RAG is the most advanced technique for retrieve the information from the document it makes super easier with pipeline where you give a doc to the document loader then you split in chunks then generate embeddings (vectors) and those vectors stores in vector store after that we retrieve the information to the LLM's and we get the accurate info as per the query the core thing is the storing embeddings in numerical form in vector store to the machine because machine can understand only numerical form so basically what happens your embedding stores in vector store as per the semantic search format basically between 0 to 1 which defines similarity score higher similarity score returns most accurate answer, in short whenever you pass query it finds higher similarity score values and you return in string format thru parsing. So simply we connect our documents to the LLM for automate our workflow.
+
+So the real world example is chatgpt, gemini, anthropic etc.. Just like we attach a code file and AI can fix bugs, structured code, enhancement etc.
+
+
+Q. Suppose your RAG-based Q&A app is returning irrelevant answers. What could be the reasons and fixes?
+
+Ans: This problem might occur with several reasons like in-proper chunking (if we not maintain 80/20 ratio between chunk size & overlap), parsing outputs, old embedding model & latest LLM might hallucinate and lastly I would say temperature also plays a huge role for creativity & logical answers, so in-appropriate temperature also raise irrelevant answers, same as chunking plays crucial role for semantic search sometimes may give grammatical error part as a answer if not doing properly.
+
+
+Q. What is chunking in RAG? How does chunk size affect retrieval quality?
+
+Ans: Chunking is a very important part for semantic search while building RAG based apps, so basically chunking decides how much relevant content take and retrieve to the LLM means higher number gives longer results. chunking handle with 2 params 1. chunk size which is how much content it can carry and chunk overlap is how much relevant part we can get. Ideally we maintain 80/20 ratio for both, so if chunk size is not proper then we might get garbage if too high or we lose the semantic meaning if too low. So it affects the retrieval quality in a way like long context answers gives accurate answers with full glossaries which gives clear perception about any topic, now short context for getting quick answers.
+
+
+Q. How would you handle hallucinations in LLM responses?
+
+Ans: That's a common problem while dealing with LLM's, so generally I can overcome this problem with set up proper prompt template so LLM knows what to give so it solves around 80% of the problem, now there are also other ways there I can make improvement like chunk size and chunk overlap for proper & meaningful context, use latest embeddings model useful for semantic searching, proper parsers for retrieve only answers also maintain temperature value for creative & unique responses. So in-short I focus on "Indexing" part for prevent any hallucinations.
+
+
+Q. How would you secure a GenAI application that deals with private company documents?
+
+Ans: As per my knowledge I can set-up LLM model locally then we have 100% security over our all kinds of confidential documents you can give as much as you can because our model is running locally so we have the greater advantage over API where they might stole our documents for further training but running locally we only have access to our LLM so it's totally secure but running LLM locally requires solid hardware structure like mostly use GPU's for fast and efficient responses.
+
+
+Q. If latency is too high in your LLM app, what are some ways to optimize it?
+
+Ans: Use a smaller model or offline models or  quantized model so it use less memory. Also reduced chunk size, at retrieval level used top_k = 3 small chunk size if text is huge, also run model locally means offline mode and keep model and database on same server to reduce network delay, also we can use cashing responses for same queries.
+

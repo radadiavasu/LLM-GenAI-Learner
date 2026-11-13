@@ -1,0 +1,65 @@
+Decorators
+
+- In python decorator is a function which modifies the behaviour of another function without changing it's original code, in simple words we can use another function properties or behavior into other functions without needs to re-right logic for another functions and it denotes with @func_name().
+
+For example: if you built a logic function and other function required authentication before access it's properties, so rather than re-right for each we cane deonte @ with function name for other function on top of it so login functionality always required before accessing those functions.
+
+
+Iterators
+
+- Iterator is same just like "for loop" so traverse each element one-by-one. It implements two methods - "__iter__() & __next__()". So for loop internally use iterator.
+
+
+Generators
+
+- Generator is a special type of iterator which is creating using "yield" keyword and it generates values at a time instead all at once like "return" function storing them in memory.
+
+
+Lambda Function
+
+- It is an anonymous single-line function in python. It is no-named function so it us used when we need a small function for short period of time.
+
+
+Constructors
+
+- In python constructor is a special method that automatically executes when an object of a class is created.
+
+Example: __init__(). It runs automatically when you create a object.
+
+
+Q. What is 'Self' parameter in python?
+
+Ans: It is the current object of class. We need it to keep each object's data separate when multiple objects share the same methods. Python passes 'self' automatically in the background and the 'self' is the naming convention we can pass it to anything but as per global programming standards we maintain 'self' parameter so anyone can get the idea about it.
+
+
+Q. What is Instance Method?
+
+Ans: Instance methods are most common methods in a class, they work with instance variables and use with 'self' parameter to access object data.
+
+For example:
+
+class -> __init__() method -> then the common func() can access __init__() instances with 'self' parameter is called instance method.
+
+
+Q. What is Class Method?
+
+Ans: Class method works with class variables instead of instance(method) variables. They use 'cls' as their first parameter and denote with @classmethod decorator.
+
+
+Q. What is Static Method?
+
+Ans: Static method doesn't use class variables or instance variables, they behave like a normal functions but written inside of class for logical grouping. Also they do not use 'self' & 'cls'. They denote with @staticmethod.
+
+
+Q. What is deep copy and shallow copy?
+
+Ans: A shallow copy creates a new outer box, but the items inside still point to the original data. If I change an inner item in the copy, it accidentally changes the original too.
+
+A deep copy makes a completely separate duplicate of everything inside and out. Changing the copy will never affect the original, though it takes more time and memory to create.
+
+
+Q. What is *args and **kwargs?
+
+Ans: *args allows a function to accept a variable of positional arguments means you can pass any number of values, and internally *args becomes tuple.
+
+**kwargs allows a function to accept a variable of keyword (key, value) arguments, and internally **kwargs becomes dict.
