@@ -20,7 +20,12 @@ Ans: Both are the part of supervised learning so classification is the most comm
 
 Q. What’s cross-validation and why is it used?
 
-Ans: Cross-validation checks how models performs on un-seen data (testing data) when by dividing the dataset into multiple parts. And this is useful to check how our model behaves on different data so that way we can check the performance of the model and evaluate the accuracy or any improvements needed or not like prevent overfitting / underfitting if get.
+Ans: Cross-validation checks how models performs on un-seen data (testing data) when by dividing the dataset into multiple parts. And this is useful to check how our model behaves on different data so that's way we can check performance of the model and evaluate the accuracy whether any improvements needed or not like prevent overfitting / underfitting if get.
+
+
+Q. What is Resnet?
+
+Ans: Resnet called Residual network. It comes in picture to solve vanishing gradient problem during backpropagation in deep neural networks. When network getting bigger accuracy drops, it starts decreasing. So we use skip connections to add input add directly with the output of deeper layers, but rather than learning from scratch it uses skip connections and learn from residual mapping means remaining part. Because of this gradient flows smoothly and we able to train deeper models in CNN like resnet50 / resenet101.
 
 
 Q. What’s the ROC curve and AUC score?
