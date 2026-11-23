@@ -648,9 +648,11 @@ Document(
 ### Vector DB
 
 1. FAISS - A facebook devloped library used for when you have control over your data means use FAISS when your data must stay in your local system.
-2. Pinecone - Very usefull for quick uses and easy setup with LLM prototype or client demo.
-3. Weaviate - Weaviate help to retreive advanved metadata like text/image/audio/video metadata.
+2. Pinecone - Very usefull for quick uses and easy setup with LLM prototype or client demo and cloud only support.
+3. Weaviate - Weaviate help to retrieve advanced metadata like text/image/audio/video and strong hybrid search capabilities (semantic + BM25).
 4. ChromaDB - Widely used as provides 100% local developeent & easy python setup for loading all embeddings in local db for quick RAG development locally.
+5. Qdrant - Open-source and built in rust, known for high speed, low memory use and strong metadata filtering.
+6. Milvus - Open-source powerhouse built for massive, enterprise-scale datasets (billions of vectors); comes with a managed cloud version called Zilliz.
 
 ---
 
