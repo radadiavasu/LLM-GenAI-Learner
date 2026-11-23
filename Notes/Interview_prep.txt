@@ -132,3 +132,13 @@ Q. If latency is too high in your LLM app, what are some ways to optimize it?
 
 Ans: Use a smaller model or offline models or  quantized model so it use less memory. Also reduced chunk size, at retrieval level used top_k = 3 small chunk size if text is huge, also run model locally means offline mode and keep model and database on same server to reduce network delay, also we can use cashing responses for same queries.
 
+
+Q. Difference between MySQL and PostgreSQL?
+
+Ans: Both are open-source SQL databases that store data in structured tables, but they have different strengths.
+
+MySQL is a purely relational database focused on speed and simplicity. It is great for read-heavy apps like when thousands of users are browsing a website at the same time. It is also a bit more forgiving with formatting rules, making it easy to set up.
+
+PostgreSQL is an object-relational database built for complex work. It handles live, incoming data without slowing down and strictly follows SQL rules to protect data accuracy. Plus, it supports advanced features like native JSON, custom data types, and extensions like PostGIS for maps or pgvector for AI.
+
+In short, I’d use MySQL for fast, straightforward web apps, and PostgreSQL for complex systems that need high data accuracy and advanced features.
