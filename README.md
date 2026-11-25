@@ -724,7 +724,7 @@ Instant visibility into bottlenecks, data-backed confidence when making pipeline
 # Types of RAG
 
 ## 1. Naive RAG (The Simple Baseline)
-* **What it is:** The basic 3-step setup: **Search $\rightarrow$ Paste into Prompt $\rightarrow$ Generate Answer**.
+* **What it is:** The basic 3-step setup: **Search -> Paste into Prompt -> Generate Answer**.
 * **Why use it:** It's the quickest and easiest way to build a quick test version or simple prototype.
 * **The Problem:** It often fails in real applications because it brings in irrelevant text (noise), misses exact matches (like serial numbers), and confuses the AI.
 
