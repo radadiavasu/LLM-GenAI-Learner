@@ -2,7 +2,7 @@ Decorators
 
 - In python decorator is a function which modifies the behaviour of another function without changing it's original code, in simple words we can use another function properties or behavior into other functions without needs to re-right logic for another functions and it denotes with @func_name().
 
-For example: if you built a logic function and other function required authentication before access it's properties, so rather than re-right for each we cane deonte @ with function name for other function on top of it so login functionality always required before accessing those functions.
+For example: if you built a login function and other function required authentication before access it's properties, so rather than re-right for each we cane deonte @ with function name for other function on top of it so login functionality always required before accessing those functions.
 
 
 Iterators
